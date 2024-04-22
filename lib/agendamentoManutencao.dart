@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'styles.dart';
 
-class CadastraDataHorarioPage extends StatelessWidget {
-  const CadastraDataHorarioPage({super.key});
+class AgendamentoManutencao extends StatelessWidget {
+  const AgendamentoManutencao({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +12,7 @@ class CadastraDataHorarioPage extends StatelessWidget {
           "IETEL Solar",
           style: ietelSolar,
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       backgroundColor: const Color(0xFF082b59),
       body: Center(

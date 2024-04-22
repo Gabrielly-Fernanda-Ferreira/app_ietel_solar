@@ -17,6 +17,7 @@ class ContatoPage extends StatelessWidget {
           "IETEL Solar",
           style: ietelSolar,
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       backgroundColor: const Color(0xFF082b59),
       body: Center(
@@ -70,7 +71,7 @@ class ContatoPage extends StatelessWidget {
                               children: [
                                 const Padding(
                                   padding: EdgeInsets.only(top: 15),
-                                  child: Text("Matrix em Potirendaba - SP",
+                                  child: Text("Matriz em Potirendaba - SP",
                                       style: contato),
                                 ),
                                 Padding(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'resultado.page.dart';
 import 'calculadora.page.dart';
 import 'cadastraManutencao.page.dart';
-import 'cadastraDataHorario.page.dart';
+import 'agendamentoManutencao.dart';
 import 'login.page.dart';
 import 'contato.page.dart';
 
@@ -34,7 +34,7 @@ class App extends StatelessWidget {
         "/calculadora": (context) => const CalculadoraPage(),
         "/resultado": (context) => const ResultadoPage(),
         "/cadastraManutencao": (context) => const CadastraManutencaoPage(),
-        "/agendamento": (context) => const CadastraDataHorarioPage(),
+        "/agendamentoManutencao": (context) => const AgendamentoManutencao(),
         "/login": (context) => const LoginPage(),
         "/contato": (context) => ContatoPage(),
       },
