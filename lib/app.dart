@@ -5,6 +5,7 @@ import 'cadastraManutencao.page.dart';
 import 'agendamentoManutencao.dart';
 import 'login.page.dart';
 import 'contato.page.dart';
+import 'listaCandidatos.page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -37,8 +38,9 @@ class App extends StatelessWidget {
         "/agendamentoManutencao": (context) => const AgendamentoManutencao(),
         "/login": (context) => const LoginPage(),
         "/contato": (context) => ContatoPage(),
+        "/listaCandidatos": (context) => const ListaCandidatosPage(),
       },
-      initialRoute: '/login',
+      initialRoute: '/listaCandidatos',
     );
   }
 }
