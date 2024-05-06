@@ -7,12 +7,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "IETEL SOLAR",
-          style: ietelSolar,
-        ),
-      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFFF58934),
         child: const Icon(Icons.add, color: Colors.white),
@@ -143,7 +137,7 @@ class LoginPage extends StatelessWidget {
                         "LOGAR",
                         style: button,
                       ),
-                      onPressed: () {},
+                      onPressed: () => Navigator.pushReplacementNamed(context, '/')
                     ),
                   ),
                 ),
