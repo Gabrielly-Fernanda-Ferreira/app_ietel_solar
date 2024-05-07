@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'styles.dart';
 
-class AgendamentoManutencao extends StatelessWidget {
-  const AgendamentoManutencao({super.key});
+class AgendamentoManu extends StatefulWidget {
+  const AgendamentoManu({super.key});
+
+  @override
+  AgendamentoManutencao createState() => AgendamentoManutencao();
+}
+
+class AgendamentoManutencao extends State<AgendamentoManu> {
+  final TextEditingController _dataController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +36,7 @@ class AgendamentoManutencao extends StatelessWidget {
             child: Column(
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -49,54 +57,54 @@ class AgendamentoManutencao extends StatelessWidget {
                 ),
 
                 //Data
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                    top: 30
-                  ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
                   child: TextField(
-                    cursorColor:  Color(0xFF082b59),
+                    controller: _dataController,
+                    cursorColor: const Color(0xFF082b59),
                     cursorWidth: 1.5,
-                    style: TextStyle(fontSize: 14, color: Colors.black),
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      hintText: "Data",
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFF082b59),
-                          width: 2,
+                    decoration: const InputDecoration(
+                        hintText: "Data",
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF082b59),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
                         ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFFF58934),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
                         ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFFF58934),
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                    ),
+                        prefixIcon: Icon(Icons.date_range)),
+                    readOnly: true,
+                    onTap: () {
+                      _selectDate(context);
+                    },
                   ),
                 ),
 
                 //Horário
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                    top: 15,
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: TextField(
-                    cursorColor: Color(0xFF082b59),
+                    // controller: _timeController,
+                    cursorColor: const Color(0xFF082b59),
                     cursorWidth: 1.5,
-                    style: TextStyle(fontSize: 14, color: Colors.black),
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                    controller: _timeController,
                     maxLength: 4,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       counterText: '',
                       hintText: "Horário",
                       focusedBorder: OutlineInputBorder(
@@ -118,15 +126,17 @@ class AgendamentoManutencao extends StatelessWidget {
                         ),
                       ),
                     ),
-                    keyboardType: TextInputType.text,
+                    readOnly: true,
+                    onTap: () {
+                      _selectTime(context);
+                    },
                   ),
                 ),
 
-
                 //Botão
                 Padding(
-                  padding:
-                      const EdgeInsets.only(left: 15, right: 15, bottom: 32, top: 30),
+                  padding: const EdgeInsets.only(
+                      left: 15, right: 15, bottom: 32, top: 30),
                   child: SizedBox(
                     width: 200,
                     height: 36,
@@ -139,8 +149,9 @@ class AgendamentoManutencao extends StatelessWidget {
                         ),
                         overlayColor: MaterialStateProperty.resolveWith<Color?>(
                           (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.hovered))
-                              return Color(0xFF082b59);
+                            if (states.contains(MaterialState.hovered)) {
+                              return const Color(0xFF082b59);
+                            }
                             return null;
                           },
                         ),
@@ -159,5 +170,25 @@ class AgendamentoManutencao extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 30)),
+    );
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    TimeOfDay? timed =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+
+    if (timed != null) {
+      setState(() {
+        _timeController.text = timed.format(context).toString();
+      });
+    }
   }
 }
