@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ietel_solar/cadastoOrcamento.page.dart';
+import 'package:ietel_solar/listaManutencao.page.dart';
+import 'package:ietel_solar/listaOrcamento.page.dart';
 import 'resultado.page.dart';
 import 'calculadora.page.dart';
 import 'cadastraManutencao.page.dart';
@@ -38,9 +40,11 @@ class App extends StatelessWidget {
         "/agendamentoManutencao": (context) => const AgendamentoManu(),
         "/login": (context) => const LoginPage(),
         "/contato": (context) => const ContatoPage(),
-        "/cadastroOrcamento": (context) => CadastroOrc()
+        "/cadastroOrcamento": (context) => CadastroOrc(),
+        "/listaOrcamento": (context) => ListaOrcamento(),
+        "/listaManutencao": (context) => ListaManuntencao()
       },
-      initialRoute: '/cadastraManutencao',
+      initialRoute: '/listaManutencao',
     );
   }
 }
