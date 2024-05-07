@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'styles.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 
-class CadastraManutencaoPage extends StatelessWidget {
-  const CadastraManutencaoPage({super.key});
+class CadastroMan extends StatefulWidget {
+  const CadastroMan({super.key});
+
+  @override
+  CadastraManutencao createState() => CadastraManutencao();
+}
+
+class CadastraManutencao extends State<CadastroMan> {
+  final TextEditingController _dataController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +39,13 @@ class CadastraManutencaoPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Agende a sua ",
-                         style: titulo,
+                        style: titulo,
                       ),
                       Text(
                         "Manutenção",
@@ -51,11 +61,7 @@ class CadastraManutencaoPage extends StatelessWidget {
 
                 //Nome
                 const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                    top: 30
-                  ),
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 20),
                   child: TextField(
                     cursorColor: Color(0xFF082b59),
                     cursorWidth: 1.5,
@@ -86,17 +92,13 @@ class CadastraManutencaoPage extends StatelessWidget {
                 ),
 
                 //CPF
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: TextField(
-                    cursorColor: Color(0xFF082b59),
+                    cursorColor: const Color(0xFF082b59),
                     cursorWidth: 1.5,
-                    style: TextStyle(fontSize: 14, color: Colors.black),
-                    maxLength: 11,
-                    decoration: InputDecoration(
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                    decoration: const InputDecoration(
                       counterText: '',
                       hintText: "CPF",
                       focusedBorder: OutlineInputBorder(
@@ -118,22 +120,21 @@ class CadastraManutencaoPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    keyboardType: TextInputType.text,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      CpfInputFormatter(),
+                    ],
                   ),
                 ),
 
                 //Telefone
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: TextField(
-                    cursorColor: Color(0xFF082b59),
+                    cursorColor: const Color(0xFF082b59),
                     cursorWidth: 1.5,
-                    style: TextStyle(fontSize: 14, color: Colors.black),
-                    maxLength: 11,
-                    decoration: InputDecoration(
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                    decoration: const InputDecoration(
                       counterText: '',
                       hintText: "Telefone",
                       focusedBorder: OutlineInputBorder(
@@ -155,16 +156,16 @@ class CadastraManutencaoPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    keyboardType: TextInputType.text,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      TelefoneInputFormatter()
+                    ],
                   ),
                 ),
 
                 //Endereço
                 const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                  ),
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: TextField(
                     cursorColor: Color(0xFF082b59),
                     cursorWidth: 1.5,
@@ -196,10 +197,7 @@ class CadastraManutencaoPage extends StatelessWidget {
 
                 //Bairro
                 const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                  ),
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: TextField(
                     cursorColor: Color(0xFF082b59),
                     cursorWidth: 1.5,
@@ -230,55 +228,16 @@ class CadastraManutencaoPage extends StatelessWidget {
                 ),
 
                 //Número
-                const Padding(padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                ),
-                  child: TextField(
-                      cursorColor: Color(0xFF082b59),
-                      cursorWidth: 1.5,
-                      style: TextStyle(fontSize: 14, color: Colors.black),
-                      maxLength: 4,
-                      decoration: InputDecoration(
-                        counterText: '',
-                        hintText: "Número",
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xFF082b59),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xFFF58934),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                      ),
-                      keyboardType: TextInputType.text,
-                    ),
-                  ),
-
-                //CEP
                 const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                  ),
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: TextField(
                     cursorColor: Color(0xFF082b59),
                     cursorWidth: 1.5,
-                    maxLength: 8,
                     style: TextStyle(fontSize: 14, color: Colors.black),
+                    maxLength: 4,
                     decoration: InputDecoration(
                       counterText: '',
-                      hintText: "CEP",
+                      hintText: "Número",
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF082b59),
@@ -302,12 +261,45 @@ class CadastraManutencaoPage extends StatelessWidget {
                   ),
                 ),
 
+                //CEP
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                  child: TextField(
+                    cursorColor: const Color(0xFF082b59),
+                    cursorWidth: 1.5,
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                    decoration: const InputDecoration(
+                      counterText: '',
+                      hintText: "CEP",
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFF082b59),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFF58934),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      CepInputFormatter(),
+                    ],
+                  ),
+                ),
+
                 //Cidade
                 const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                  ),
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: TextField(
                     cursorColor: Color(0xFF082b59),
                     cursorWidth: 1.5,
@@ -338,17 +330,15 @@ class CadastraManutencaoPage extends StatelessWidget {
                 ),
 
                 //Data
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: TextField(
-                    cursorColor:  Color(0xFF082b59),
+                    controller: _dataController,
+                    cursorColor: const Color(0xFF082b59),
                     cursorWidth: 1.5,
-                    style: TextStyle(fontSize: 14, color: Colors.black),
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Data",
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -369,21 +359,22 @@ class CadastraManutencaoPage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    readOnly: true,
+                    onTap: () {
+                      _selectDate(context);
+                    },
                   ),
                 ),
 
                 //Horário
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: TextField(
-                    cursorColor: Color(0xFF082b59),
+                    controller: _timeController,
+                    cursorColor: const Color(0xFF082b59),
                     cursorWidth: 1.5,
-                    style: TextStyle(fontSize: 14, color: Colors.black),
-                    maxLength: 4,
-                    decoration: InputDecoration(
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                    decoration: const InputDecoration(
                       counterText: '',
                       hintText: "Horário",
                       focusedBorder: OutlineInputBorder(
@@ -405,15 +396,17 @@ class CadastraManutencaoPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    keyboardType: TextInputType.text,
+                    readOnly: true,
+                    onTap: () {
+                      _selectTime(context);
+                    },
                   ),
                 ),
 
-
                 //Botão
                 Padding(
-                  padding:
-                      const EdgeInsets.only(top: 30, left: 15, right: 15, bottom: 32),
+                  padding: const EdgeInsets.only(
+                      top: 30, left: 15, right: 15, bottom: 32),
                   child: SizedBox(
                     width: 200,
                     height: 36,
@@ -426,8 +419,9 @@ class CadastraManutencaoPage extends StatelessWidget {
                         ),
                         overlayColor: MaterialStateProperty.resolveWith<Color?>(
                           (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.hovered))
-                              return Color(0xFF082b59);
+                            if (states.contains(MaterialState.hovered)) {
+                              return const Color(0xFF082b59);
+                            }
                             return null;
                           },
                         ),
@@ -446,5 +440,31 @@ class CadastraManutencaoPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 30)),
+    );
+
+    if (picked != null) {
+      setState(() {
+        _dataController.text = "${picked.day}/${picked.month}/${picked.year}";
+      });
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    TimeOfDay? timed =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+
+    if (timed != null) {
+      setState(() {
+        _timeController.text = timed.format(context).toString();
+      });
+    }
   }
 }
