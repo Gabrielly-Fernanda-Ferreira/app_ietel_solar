@@ -4,7 +4,12 @@ import 'styles.dart';
 import 'package:flutter/material.dart';
 
 import 'login.page.dart';
+import 'cadastraUser.page.dart';
+import 'editaUser.page.dart';
+
 import 'contato.page.dart';
+import 'funcionamento.page.dart';
+import 'empresa.page.dart';
 
 import 'agendamentoManutencao.dart';
 import 'cadastraManutencao.page.dart';
@@ -294,7 +299,7 @@ class App extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                const ListaVagasPage()));
+                                const FuncionamentoPage()));
                   },
                 ),
 
@@ -375,7 +380,7 @@ class App extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                const ListaVagasPage()));
+                                const EmpresaPage()));
                   },
                 ),
 
