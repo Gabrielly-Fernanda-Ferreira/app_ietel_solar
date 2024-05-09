@@ -602,6 +602,11 @@ class App extends StatelessWidget {
         "/alteraVagas": (context) => const AlteraVagasPage(),
         "/cadastraCandidatos": (context) => const CadastraCandidatosPage(),
         "/listaCandidatos": (context) => const ListaCandidatosPage(),
+        "/cadastraUser": (context) => const CadastraUserPage(),
+        "/editaUser": (context) => const EditaUserPage(),
+        "/funcionamento": (context) => const FuncionamentoPage(),
+        "/empresa": (context) => const EmpresaPage(),
+       
       },
       initialRoute: '/login',
     );
