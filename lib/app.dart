@@ -514,7 +514,7 @@ class App extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              const ContatoPage()));
+                              const ListaManutencao()));
                 },
               ),
 
