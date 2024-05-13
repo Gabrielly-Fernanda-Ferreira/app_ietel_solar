@@ -332,7 +332,7 @@ class App extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                const ListaVagasPage()));
+                                const CadastroOrc()));
                   },
                 ),
 
@@ -468,7 +468,7 @@ class App extends StatelessWidget {
               //Agenda Orçamentos
               ListTile(
                 leading: const Icon(Icons.perm_contact_calendar, color: Color(0xFFF58934)),
-                title: const Text("Agenda Orçamentos", style: menu),
+                title: const Text("Agenda Horário Manutenção", style: menu),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -478,24 +478,24 @@ class App extends StatelessWidget {
                 },
               ),
 
-              //Lista de Orçamentos
+              //Lista de Vagas
               ListTile(
                 leading:
                     const Icon(Icons.book, color: Color(0xFFF58934)),
-                title: const Text("Lista de Orçamentos", style: menu),
+                title: const Text("Lista de Vagas", style: menu),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              const ListaVagasPage()));
+                              const ListaVagasAdmPage()));
                 },
               ),
 
               //Agenda Manutenções
               ListTile(
                 leading: const Icon(Icons.perm_contact_calendar, color: Color(0xFFF58934)),
-                title: const Text("Agenda Manutenções", style: menu),
+                title: const Text("Agenda Horário Manutenções", style: menu),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -518,32 +518,32 @@ class App extends StatelessWidget {
                 },
               ),
 
-              //Lista de Vagas
+              //Horário Orçamento Lista
               ListTile(
                 leading: const Icon(Icons.work,
                     color: Color(0xFFF58934)),
-                title: const Text("Lista de Vagas", style: menu),
+                title: const Text("Lista de Horarios de Orçamentos", style: menu),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              const ListaVagasAdmPage()));
+                              const ListaOrcamento()));
                 },
               ),
 
-                //Horário Manutenção Lista
+                //Cadastro Horário Orçamento
                   ListTile(
                     leading: const Icon(Icons.build_rounded,
                         color: Color(0xFFF58934)),
-                    title: const Text("Lista de Manutenções Disponiveis",
+                    title: const Text("Cadastro de Orçamentos",
                         style: menu),
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  const ListaManuntencao()));
+                                  const CadastroOrc()));
                     },
                   ),
 
