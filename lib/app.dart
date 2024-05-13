@@ -399,7 +399,7 @@ class App extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                const ListaVagasPage()));
+                                const EditaUserPage()));
                   },
                 ),
 
@@ -447,7 +447,7 @@ class App extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              const ListaVagasPage()));
+                              const FuncionamentoPage()));
                 },
               ),
 
@@ -584,7 +584,7 @@ class App extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              const ListaVagasPage()));
+                              const EditaUserPage()));
                 },
               ),
 
