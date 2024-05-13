@@ -10,7 +10,7 @@ class LoginPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFFF58934),
         child: const Icon(Icons.add, color: Colors.white),
-        onPressed: () => Navigator.pushNamed(context, "/newuser"),
+        onPressed: () => Navigator.pushNamed(context, "/cadastraUser"),
       ),
       backgroundColor: const Color(0xFF082b59),
       body: Center(
