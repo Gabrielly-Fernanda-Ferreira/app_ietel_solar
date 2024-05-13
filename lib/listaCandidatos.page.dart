@@ -15,8 +15,9 @@ class ListaCandidatosPage extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       backgroundColor: const Color(0xFF082b59),
-      body: Center(
-        child: Padding(
+      body: ListView(
+        children:[ 
+          Padding(
           padding: const EdgeInsets.all(10),
           child: Container(
             decoration: const BoxDecoration(
@@ -250,6 +251,7 @@ class ListaCandidatosPage extends StatelessWidget {
             ),
           ),
         ),
+        ],
       ),
     );
   }
