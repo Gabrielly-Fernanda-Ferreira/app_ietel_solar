@@ -509,6 +509,19 @@ class App extends StatelessWidget {
                 },
               ),
 
+               ListTile(
+                    leading: const Icon(Icons.build_rounded,
+                        color: Color(0xFFF58934)),
+                    title: const Text("Agenda Horário Orçamentos", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const AgendamentoOrcamento()));
+                    },
+                  ),
+
               //Horário Orçamento Lista
               ListTile(
                 leading: const Icon(Icons.work,
@@ -614,6 +627,7 @@ class App extends StatelessWidget {
         "/ordemDeServico": (context) => const OrdemDeServicoPage(),
         "/listaOS": (context) => const ListaOrdemDeServico(),
         "/editarOS": (context) => const EditarOrdemDeServicoPage()
+        "/agendamentoOrcamento": (context) => const AgendamentoOrcamento()
       },
       initialRoute: '/login',
     );
