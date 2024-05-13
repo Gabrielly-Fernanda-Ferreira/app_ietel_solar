@@ -464,20 +464,6 @@ class App extends StatelessWidget {
                               const CalculadoraPage()));
                 },
               ),
-
-              //Agenda Orçamentos
-              ListTile(
-                leading: const Icon(Icons.perm_contact_calendar, color: Color(0xFFF58934)),
-                title: const Text("Agenda Horário Manutenção", style: menu),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const AgendamentoManutencao()));
-                },
-              ),
-
               //Lista de Vagas
               ListTile(
                 leading:
@@ -492,10 +478,10 @@ class App extends StatelessWidget {
                 },
               ),
 
-              //Agenda Manutenções
+              //Agenda Orçamentos
               ListTile(
                 leading: const Icon(Icons.perm_contact_calendar, color: Color(0xFFF58934)),
-                title: const Text("Agenda Horário Manutenções", style: menu),
+                title: const Text("Agenda Horário Manutenção", style: menu),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -531,49 +517,6 @@ class App extends StatelessWidget {
                               const ListaOrcamento()));
                 },
               ),
-
-                //Cadastro Horário Orçamento
-                  ListTile(
-                    leading: const Icon(Icons.build_rounded,
-                        color: Color(0xFFF58934)),
-                    title: const Text("Cadastro de Orçamentos",
-                        style: menu),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const CadastroOrc()));
-                    },
-                  ),
-
-                  //Horário Orçamento Lista
-                  ListTile(
-                    leading: const Icon(Icons.perm_contact_calendar, color: Color(0xFFF58934)),
-                    title: const Text("Lista de Horarios de Orçamentos",
-                        style: menu),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const ListaOrcamento()));
-                    },
-                  ),
-
-                  //Cadastro Horário Orçamento
-                  ListTile(
-                    leading: const Icon(Icons.perm_contact_calendar, color: Color(0xFFF58934)),
-                    title: const Text("Cadastro de Horários de Orçamentos",
-                        style: menu),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const CadastroOrc()));
-                    },
-                  ),
 
               //Configurações
               ListTile(
