@@ -15,7 +15,7 @@ class CadastraManutencaoPage extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       backgroundColor: const Color(0xFF082b59),
-      body: ListView( 
+      body: ListView(  
         children: [
         Padding(
           padding: const EdgeInsets.all(10),
