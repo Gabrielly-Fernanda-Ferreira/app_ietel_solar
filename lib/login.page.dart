@@ -13,8 +13,9 @@ class LoginPage extends StatelessWidget {
         onPressed: () => Navigator.pushNamed(context, "/cadastraUser"),
       ),
       backgroundColor: const Color(0xFF082b59),
-      body: ListView(
-        children:[ Padding(
+      body: 
+      Center(
+        child: Padding(
           padding: const EdgeInsets.all(10),
           child: Container(
             decoration: const BoxDecoration(
@@ -145,7 +146,6 @@ class LoginPage extends StatelessWidget {
             ),
           ),
         ),
-        ],
       ),
     );
   }
