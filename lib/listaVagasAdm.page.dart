@@ -35,8 +35,9 @@ class ListaVagasAdmPage extends StatelessWidget {
         onPressed: () => _telaCadastraVagas(context),
       ),
       backgroundColor: const Color(0xFF082b59),
-      body: Center(
-        child: Padding(
+      body: ListView(
+        children:[ 
+          Padding(
           padding: const EdgeInsets.all(10),
           child: Container(
             decoration: const BoxDecoration(
@@ -184,6 +185,7 @@ class ListaVagasAdmPage extends StatelessWidget {
             ),
           ),
         ),
+        ],
       ),
     );
   }
