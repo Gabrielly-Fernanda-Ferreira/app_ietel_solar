@@ -26,6 +26,7 @@ import 'listaCandidatos.page.dart';
 
 
 import 'package:ietel_solar/cadastoOrcamento.page.dart';
+import 'package:ietel_solar/agendamentoOrcamento.dart';
 import 'package:ietel_solar/listaManutencao.page.dart';
 import 'package:ietel_solar/listaOrcamento.page.dart';
 
