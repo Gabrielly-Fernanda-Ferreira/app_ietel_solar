@@ -15,7 +15,8 @@ class CadastraUserPage extends StatelessWidget {
       ),
       backgroundColor: const Color(0xFF082b59),
       body: ListView(
-        children:[ Padding(
+        children:[ 
+          Padding(
           padding: const EdgeInsets.all(10),
           child: Container(
             decoration: const BoxDecoration(
