@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  brasil_fields: any
 
   #image carousel slider
   carousel_slider: ^4.1.1
