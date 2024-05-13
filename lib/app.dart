@@ -24,6 +24,12 @@ import 'alteraVagas.page.dart';
 import 'cadastraCandidatos.page.dart';
 import 'listaCandidatos.page.dart';
 
+
+import 'package:ietel_solar/cadastoOrcamento.page.dart';
+import 'package:ietel_solar/listaManutencao.page.dart';
+import 'package:ietel_solar/listaOrcamento.page.dart';
+
+
 class App extends StatelessWidget {
   const App({super.key});
   
@@ -526,6 +532,49 @@ class App extends StatelessWidget {
                 },
               ),
 
+                //Horário Manutenção Lista
+                  ListTile(
+                    leading: const Icon(Icons.build_rounded,
+                        color: Color(0xFFF58934)),
+                    title: const Text("Lista de Manutenções Disponiveis",
+                        style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const ListaManuntencao()));
+                    },
+                  ),
+
+                  //Horário Orçamento Lista
+                  ListTile(
+                    leading: const Icon(Icons.perm_contact_calendar, color: Color(0xFFF58934)),
+                    title: const Text("Lista de Horarios de Orçamentos",
+                        style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const ListaOrcamento()));
+                    },
+                  ),
+
+                  //Cadastro Horário Orçamento
+                  ListTile(
+                    leading: const Icon(Icons.perm_contact_calendar, color: Color(0xFFF58934)),
+                    title: const Text("Cadastro de Horários de Orçamentos",
+                        style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const CadastroOrc()));
+                    },
+                  ),
+
               //Configurações
               ListTile(
                 leading: const Icon(Icons.settings, color: Color(0xFFF58934)),
@@ -611,7 +660,9 @@ class App extends StatelessWidget {
         "/editaUser": (context) => const EditaUserPage(),
         "/funcionamento": (context) => const FuncionamentoPage(),
         "/empresa": (context) => const EmpresaPage(),
-       
+        "/listaManutencao": (context) => const ListaManuntencao(),
+        "/listaOrcamento": (context) => const ListaOrcamento(),
+        "/cadastraOrcamento": (context) => const CadastroOrc(),
       },
       initialRoute: '/login',
     );
