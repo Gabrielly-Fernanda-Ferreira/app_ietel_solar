@@ -1,7 +1,10 @@
-// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: curly_braces_in_flow_control_structures, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'styles.dart';
 import 'package:flutter/material.dart';
+
+import 'package:geolocator/geolocator.dart';
+import 'package:nominatim_geocoding/nominatim_geocoding.dart';
 
 import 'login.page.dart';
 import 'cadastraUser.page.dart';
@@ -36,11 +39,38 @@ import 'package:ietel_solar/os/listaOrdemDeServico.dart';
 import 'package:ietel_solar/os/ordemDeServico.page.dart';
 
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
-  
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+
   void _logout(BuildContext context) {
     Navigator.pushReplacementNamed(context, '/login');
+  }
+
+  double? latitude;
+  double? longitude;
+  String? cidade;
+
+  _pegarPosicao() async {
+    Position posicao = await Geolocator.getCurrentPosition();
+
+    setState(() {
+      latitude = posicao.latitude;
+      longitude = posicao.longitude;
+    });
+
+    Coordinate coordinate =
+        Coordinate(latitude: posicao.latitude, longitude: posicao.longitude);
+
+    Geocoding geocoding =
+        await NominatimGeocoding.to.reverseGeoCoding(coordinate);
+
+    cidade = geocoding.address.city;
   }
 
   final _nivel = 1;
@@ -76,7 +106,7 @@ class App extends StatelessWidget {
                           Radius.circular(6),
                         ),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
@@ -84,19 +114,20 @@ class App extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(left: 10),
-                                child: Icon(
-                                  Icons.location_on,
-                                  color: Color(0xFFF58934),
-                                  size: 20,
+                                child: IconButton(
+                                  icon: Icon(Icons.location_on,
+                                      color: Color(0xFFF58934)),
+                                  iconSize: 20,
+                                  onPressed: () => _pegarPosicao(),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Potirendaba - SP",
+                                '$cidade',
                                 style: clima,
                               )
                             ],
@@ -535,7 +566,7 @@ class App extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              const ListaVagasAdmPage()));
+                              ListaVagasAdmPage()));
                 },
               ),
 
@@ -615,7 +646,7 @@ class App extends StatelessWidget {
         "/calculadora": (context) => const CalculadoraPage(),
         "/resultado": (context) => const ResultadoPage(),
         "/cadastraVagas": (context) => const CadastraVagasPage(),
-        "/listaVagasAdm": (context) => const ListaVagasAdmPage(),
+        "/listaVagasAdm": (context) => ListaVagasAdmPage(),
         "/listaVagas": (context) => const ListaVagasPage(),
         "/alteraVagas": (context) => const AlteraVagasPage(),
         "/cadastraCandidatos": (context) => const CadastraCandidatosPage(),
