@@ -12,6 +12,7 @@ class EditaUserPage extends StatelessWidget {
           "IETEL SOLAR",
           style: ietelSolar,
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       backgroundColor: const Color(0xFF082b59),
       body: Center(

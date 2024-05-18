@@ -25,10 +25,10 @@ import 'cadastraCandidatos.page.dart';
 import 'listaCandidatos.page.dart';
 
 
-import 'package:ietel_solar/cadastoOrcamento.page.dart';
-import 'package:ietel_solar/agendamentoOrcamento.dart';
-import 'package:ietel_solar/listaManutencao.page.dart';
-import 'package:ietel_solar/listaOrcamento.page.dart';
+import 'cadastraOrcamento.page.dart';
+import 'agendamentoOrcamento.dart';
+import 'listaManutencao.page.dart';
+import 'listaOrcamento.page.dart';
 
 
 import 'package:ietel_solar/os/editarOrdemDeServico.dart';
@@ -470,23 +470,38 @@ class App extends StatelessWidget {
                               const CalculadoraPage()));
                 },
               ),
-              //Lista de Vagas
+
+              //Agenda Horário Orçamento
               ListTile(
-                leading:
-                    const Icon(Icons.book, color: Color(0xFFF58934)),
-                title: const Text("Lista de Vagas", style: menu),
+                leading: const Icon(Icons.perm_contact_calendar, color: Color(0xFFF58934)),
+                title: const Text("Agenda Horário Orçamento", style: menu),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              const ListaVagasAdmPage()));
+                              const AgendamentoOrcamento()));
                 },
               ),
 
-              //Agenda Orçamentos
+               //Lista de Orçamentos
               ListTile(
-                leading: const Icon(Icons.perm_contact_calendar, color: Color(0xFFF58934)),
+                leading: const Icon(Icons.book,
+                    color: Color(0xFFF58934)),
+                title: const Text("Lista de Orçamentos", style: menu),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const ListaOrcamento()));
+                },
+              ),
+
+              //Agenda Horário Manutenção
+              ListTile(
+                leading: const Icon(Icons.perm_contact_calendar,
+                    color: Color(0xFFF58934)),
                 title: const Text("Agenda Horário Manutenção", style: menu),
                 onTap: () {
                   Navigator.push(
@@ -506,34 +521,21 @@ class App extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              const ListaManutencao()));
+                              const ListaManuntencao()));
                 },
               ),
 
-               ListTile(
-                    leading: const Icon(Icons.build_rounded,
-                        color: Color(0xFFF58934)),
-                    title: const Text("Agenda Horário Orçamentos", style: menu),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const AgendamentoOrcamento()));
-                    },
-                  ),
-
-              //Horário Orçamento Lista
+              //Lista de Vagas
               ListTile(
-                leading: const Icon(Icons.work,
-                    color: Color(0xFFF58934)),
-                title: const Text("Lista de Horarios de Orçamentos", style: menu),
+                leading:
+                    const Icon(Icons.work, color: Color(0xFFF58934)),
+                title: const Text("Lista de Vagas", style: menu),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              const ListaOrcamento()));
+                              const ListaVagasAdmPage()));
                 },
               ),
 
@@ -627,7 +629,7 @@ class App extends StatelessWidget {
         "/cadastraOrcamento": (context) => const CadastroOrc(),
         "/ordemDeServico": (context) => const OrdemDeServicoPage(),
         "/listaOS": (context) => const ListaOrdemDeServico(),
-        "/editarOS": (context) => const EditarOrdemDeServicoPage()
+        "/editarOS": (context) => const EditarOrdemDeServicoPage(),
         "/agendamentoOrcamento": (context) => const AgendamentoOrcamento()
       },
       initialRoute: '/login',
