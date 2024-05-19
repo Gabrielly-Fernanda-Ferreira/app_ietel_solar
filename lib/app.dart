@@ -27,17 +27,14 @@ import 'alteraVagas.page.dart';
 import 'cadastraCandidatos.page.dart';
 import 'listaCandidatos.page.dart';
 
-
 import 'cadastraOrcamento.page.dart';
 import 'agendamentoOrcamento.dart';
 import 'listaManutencao.page.dart';
 import 'listaOrcamento.page.dart';
 
-
 import 'package:ietel_solar/os/editarOrdemDeServico.dart';
 import 'package:ietel_solar/os/listaOrdemDeServico.dart';
 import 'package:ietel_solar/os/ordemDeServico.page.dart';
-
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -47,7 +44,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-
   void _logout(BuildContext context) {
     Navigator.pushReplacementNamed(context, '/login');
   }
@@ -70,7 +66,9 @@ class _AppState extends State<App> {
     Geocoding geocoding =
         await NominatimGeocoding.to.reverseGeoCoding(coordinate);
 
-    cidade = geocoding.address.city;
+    print(geocoding);
+
+    //cidade = geocoding.address.city;
   }
 
   final _nivel = 1;
@@ -308,8 +306,6 @@ class _AppState extends State<App> {
             iconTheme: const IconThemeData(color: Colors.white),
           ),
 
-
-
           //Menu
           drawer: Drawer(
             backgroundColor: Colors.white,
@@ -329,293 +325,290 @@ class _AppState extends State<App> {
                       backgroundImage: AssetImage("images/logo_ietel.png")),
                 ),
 
-
-
                 //Acesso de Usuário
                 if (_nivel == 0) ...[
-                //Funcionamento
-                ListTile(
-                  leading: const Icon(Icons.sunny, color: Color(0xFFF58934)),
-                  title: const Text("Funcionamento", style: menu),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const FuncionamentoPage()));
-                  },
-                ),
+                  //Funcionamento
+                  ListTile(
+                    leading: const Icon(Icons.sunny, color: Color(0xFFF58934)),
+                    title: const Text("Funcionamento", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const FuncionamentoPage()));
+                    },
+                  ),
 
-                //Calculadora Solar
-                ListTile(
-                  leading:
-                      const Icon(Icons.calculate, color: Color(0xFFF58934)),
-                  title: const Text("Calculadora Solar", style: menu),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const CalculadoraPage()));
-                  },
-                ),
+                  //Calculadora Solar
+                  ListTile(
+                    leading:
+                        const Icon(Icons.calculate, color: Color(0xFFF58934)),
+                    title: const Text("Calculadora Solar", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const CalculadoraPage()));
+                    },
+                  ),
 
-                //Orçamento
-                ListTile(
-                  leading: const Icon(Icons.book, color: Color(0xFFF58934)),
-                  title: const Text("Orçamento", style: menu),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const CadastroOrc()));
-                  },
-                ),
+                  //Orçamento
+                  ListTile(
+                    leading: const Icon(Icons.book, color: Color(0xFFF58934)),
+                    title: const Text("Orçamento", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const CadastroOrc()));
+                    },
+                  ),
 
-                //Manutenção
-                ListTile(
-                  leading:
-                      const Icon(Icons.build_rounded, color: Color(0xFFF58934)),
-                  title: const Text("Manutenção", style: menu),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const CadastraManutencaoPage()));
-                  },
-                ),
+                  //Manutenção
+                  ListTile(
+                    leading: const Icon(Icons.build_rounded,
+                        color: Color(0xFFF58934)),
+                    title: const Text("Manutenção", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const CadastraManutencaoPage()));
+                    },
+                  ),
 
-                //Trabalhe Conosco
-                ListTile(
-                  leading: const Icon(Icons.work, color: Color(0xFFF58934)),
-                  title: const Text("Trabalhe Conosco", style: menu),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const ListaVagasPage()));
-                  },
-                ),
+                  //Trabalhe Conosco
+                  ListTile(
+                    leading: const Icon(Icons.work, color: Color(0xFFF58934)),
+                    title: const Text("Trabalhe Conosco", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const ListaVagasPage()));
+                    },
+                  ),
 
-                //Contatos
-                ListTile(
-                  leading: const Icon(Icons.phone, color: Color(0xFFF58934)),
-                  title: const Text("Contatos", style: menu),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const ContatoPage()));
-                  },
-                ),
+                  //Contatos
+                  ListTile(
+                    leading: const Icon(Icons.phone, color: Color(0xFFF58934)),
+                    title: const Text("Contatos", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const ContatoPage()));
+                    },
+                  ),
 
-                //Sobre Nós
-                ListTile(
-                  leading: const Icon(Icons.store_mall_directory,
-                      color: Color(0xFFF58934)),
-                  title: const Text("Sobre Nós", style: menu),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const EmpresaPage()));
-                  },
-                ),
+                  //Sobre Nós
+                  ListTile(
+                    leading: const Icon(Icons.store_mall_directory,
+                        color: Color(0xFFF58934)),
+                    title: const Text("Sobre Nós", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const EmpresaPage()));
+                    },
+                  ),
 
-                //Configurações
-                ListTile(
-                  leading: const Icon(Icons.settings, color: Color(0xFFF58934)),
-                  title: const Text("Configurações", style: menu),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const EditaUserPage()));
-                  },
-                ),
+                  //Configurações
+                  ListTile(
+                    leading:
+                        const Icon(Icons.settings, color: Color(0xFFF58934)),
+                    title: const Text("Configurações", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const EditaUserPage()));
+                    },
+                  ),
 
-                //Botão
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, right: 120, left: 20),
-                  child: ElevatedButton.icon(
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                  //Botão
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 30, right: 120, left: 20),
+                    child: ElevatedButton.icon(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.hovered))
+                              return const Color(0xFF082b59);
+                            return null;
+                          },
                         ),
                       ),
-                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.hovered))
-                            return const Color(0xFF082b59);
-                          return null;
-                        },
+                      onPressed: () => _logout(context),
+                      icon: const Icon(
+                        Icons.exit_to_app,
+                        color: Colors.white,
+                      ),
+                      label: const Text(
+                        "SAIR",
+                        style: button,
                       ),
                     ),
-                    onPressed: () => _logout(context),
-                    icon: const Icon(
-                      Icons.exit_to_app,
-                      color: Colors.white,
-                    ),
-                    label: const Text(
-                      "SAIR",
-                      style: button,
-                    ),
+                  )
+                ]
+
+                //Acesso de Administrador
+                else ...[
+                  //Funcionamento
+                  ListTile(
+                    leading: const Icon(Icons.sunny, color: Color(0xFFF58934)),
+                    title: const Text("Funcionamento", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const FuncionamentoPage()));
+                    },
                   ),
-                )
-              ]
 
+                  //Calculadora Solar
+                  ListTile(
+                    leading:
+                        const Icon(Icons.calculate, color: Color(0xFFF58934)),
+                    title: const Text("Calculadora Solar", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const CalculadoraPage()));
+                    },
+                  ),
 
+                  //Agenda Horário Orçamento
+                  ListTile(
+                    leading: const Icon(Icons.perm_contact_calendar,
+                        color: Color(0xFFF58934)),
+                    title: const Text("Agenda Horário Orçamento", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const AgendamentoOrcamento()));
+                    },
+                  ),
 
-              //Acesso de Administrador
-              else ...[
-              //Funcionamento
-              ListTile(
-                leading: const Icon(Icons.sunny, color: Color(0xFFF58934)),
-                title: const Text("Funcionamento", style: menu),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const FuncionamentoPage()));
-                },
-              ),
+                  //Lista de Orçamentos
+                  ListTile(
+                    leading: const Icon(Icons.book, color: Color(0xFFF58934)),
+                    title: const Text("Lista de Orçamentos", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const ListaOrcamento()));
+                    },
+                  ),
 
-              //Calculadora Solar
-              ListTile(
-                leading:
-                    const Icon(Icons.calculate, color: Color(0xFFF58934)),
-                title: const Text("Calculadora Solar", style: menu),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const CalculadoraPage()));
-                },
-              ),
+                  //Agenda Horário Manutenção
+                  ListTile(
+                    leading: const Icon(Icons.perm_contact_calendar,
+                        color: Color(0xFFF58934)),
+                    title: const Text("Agenda Horário Manutenção", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const AgendamentoManutencao()));
+                    },
+                  ),
 
-              //Agenda Horário Orçamento
-              ListTile(
-                leading: const Icon(Icons.perm_contact_calendar, color: Color(0xFFF58934)),
-                title: const Text("Agenda Horário Orçamento", style: menu),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const AgendamentoOrcamento()));
-                },
-              ),
+                  //Lista de Manutenções
+                  ListTile(
+                    leading: const Icon(Icons.build_rounded,
+                        color: Color(0xFFF58934)),
+                    title: const Text("Lista de Manutenções", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const ListaManuntencao()));
+                    },
+                  ),
 
-               //Lista de Orçamentos
-              ListTile(
-                leading: const Icon(Icons.book,
-                    color: Color(0xFFF58934)),
-                title: const Text("Lista de Orçamentos", style: menu),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const ListaOrcamento()));
-                },
-              ),
+                  //Lista de Vagas
+                  ListTile(
+                    leading: const Icon(Icons.work, color: Color(0xFFF58934)),
+                    title: const Text("Lista de Vagas", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  ListaVagasAdmPage()));
+                    },
+                  ),
 
-              //Agenda Horário Manutenção
-              ListTile(
-                leading: const Icon(Icons.perm_contact_calendar,
-                    color: Color(0xFFF58934)),
-                title: const Text("Agenda Horário Manutenção", style: menu),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const AgendamentoManutencao()));
-                },
-              ),
+                  //Configurações
+                  ListTile(
+                    leading:
+                        const Icon(Icons.settings, color: Color(0xFFF58934)),
+                    title: const Text("Configurações", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const EditaUserPage()));
+                    },
+                  ),
 
-              //Lista de Manutenções
-              ListTile(
-                leading: const Icon(Icons.build_rounded, color: Color(0xFFF58934)),
-                title: const Text("Lista de Manutenções", style: menu),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const ListaManuntencao()));
-                },
-              ),
-
-              //Lista de Vagas
-              ListTile(
-                leading:
-                    const Icon(Icons.work, color: Color(0xFFF58934)),
-                title: const Text("Lista de Vagas", style: menu),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              ListaVagasAdmPage()));
-                },
-              ),
-
-              //Configurações
-              ListTile(
-                leading: const Icon(Icons.settings, color: Color(0xFFF58934)),
-                title: const Text("Configurações", style: menu),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const EditaUserPage()));
-                },
-              ),
-
-              //Botão
-              Padding(
-                padding: const EdgeInsets.only(top: 30, right: 120, left: 20),
-                child: ElevatedButton.icon(
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  //Botão
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 30, right: 120, left: 20),
+                    child: ElevatedButton.icon(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.hovered))
+                              return const Color(0xFF082b59);
+                            return null;
+                          },
+                        ),
+                      ),
+                      onPressed: () => _logout(context),
+                      icon: const Icon(
+                        Icons.exit_to_app,
+                        color: Colors.white,
+                      ),
+                      label: const Text(
+                        "SAIR",
+                        style: button,
                       ),
                     ),
-                    overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                      (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.hovered))
-                          return const Color(0xFF082b59);
-                        return null;
-                      },
-                    ),
-                  ),
-                  onPressed: () => _logout(context),
-                  icon: const Icon(
-                    Icons.exit_to_app,
-                    color: Colors.white,
-                  ),
-                  label: const Text(
-                    "SAIR",
-                    style: button,
-                  ),
-                ),
-              )
-            ]
-
-
-
+                  )
+                ]
               ],
             ),
           ),

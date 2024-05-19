@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ietel_solar/app.dart';
+import 'package:nominatim_geocoding/nominatim_geocoding.dart';
 
 const firebaseConfig = FirebaseOptions(
     apiKey: "AIzaSyDLJjwwFaY2J1K5shIN819A1gemgM3ezxQ",
@@ -10,8 +11,9 @@ const firebaseConfig = FirebaseOptions(
     messagingSenderId: "271234920509",
     appId: "1:271234920509:web:bca90e85068cb6cb86fa54");
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: firebaseConfig);
   runApp(const App());
+  await NominatimGeocoding.init(reqCacheNum: 20);
 }
