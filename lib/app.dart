@@ -390,7 +390,7 @@ class _AppState extends State<App> {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  const ListaVagasPage()));
+                                  ListaVagasPage()));
                     },
                   ),
 
@@ -640,7 +640,7 @@ class _AppState extends State<App> {
         "/resultado": (context) => const ResultadoPage(),
         "/cadastraVagas": (context) => const CadastraVagasPage(),
         "/listaVagasAdm": (context) => ListaVagasAdmPage(),
-        "/listaVagas": (context) => const ListaVagasPage(),
+        "/listaVagas": (context) => ListaVagasPage(),
         "/alteraVagas": (context) => const AlteraVagasPage(),
         "/cadastraCandidatos": (context) => const CadastraCandidatosPage(),
         "/listaCandidatos": (context) => const ListaCandidatosPage(),
