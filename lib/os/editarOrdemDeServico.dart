@@ -25,7 +25,9 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       backgroundColor: const Color(0xFF082b59),
-      body: Center(
+      body:ListView( 
+      children:[ 
+        Center(
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Container(
@@ -337,6 +339,8 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
             ),
           ),
         ),
+      ),
+      ],
       ),
     );
   }
