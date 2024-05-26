@@ -10,8 +10,8 @@ class ListaVagasPage extends StatelessWidget {
 
   final firestore = FirebaseFirestore.instance;
 
-  void _telaCadastraCandidatos(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const CadastraCandidatosPage()));
+  void _telaCadastraCandidatos(BuildContext context, id_vaga) {
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => CadastraCandidatosPage(id_vaga: id_vaga)));
   }
 
   @override
@@ -83,7 +83,7 @@ class ListaVagasPage extends StatelessWidget {
                                           left: 15, right: 15, top: 20),
                                       child: InkWell(
                                         onTap: () =>
-                                            _telaCadastraCandidatos(context),
+                                            _telaCadastraCandidatos(context, doc.id),
                                         child: Container(
                                           width: MediaQuery.of(context)
                                                   .size

@@ -19,18 +19,26 @@ class ListaVagasAdmPage extends StatelessWidget {
             builder: (BuildContext context) => const CadastraVagasPage()));
   }
 
-  void _telaEditaVagas(BuildContext context) {
+  void _telaEditaVagas(
+      BuildContext context, id, cargo, tipo, local, modelo, descricao) {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) => const AlteraVagasPage()));
+            builder: (BuildContext context) => AlteraVagasPage(
+                  id: id,
+                  cargo: cargo,
+                  tipo: tipo,
+                  local: local,
+                  modelo: modelo,
+                  descricao: descricao,
+                )));
   }
 
-  void _telaListaCandidatos(BuildContext context) {
+  void _telaListaCandidatos(BuildContext context, idVaga) {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) => const ListaCandidatosPage()));
+            builder: (BuildContext context) => ListaCandidatosPage(id_vaga: idVaga)));
   }
 
   @override
@@ -107,7 +115,7 @@ class ListaVagasAdmPage extends StatelessWidget {
                                           left: 15, right: 15, top: 20),
                                       child: InkWell(
                                         onTap: () =>
-                                            _telaListaCandidatos(context),
+                                            _telaListaCandidatos(context, doc.id),
                                         child: Container(
                                           width: MediaQuery.of(context)
                                                   .size
@@ -217,7 +225,14 @@ class ListaVagasAdmPage extends StatelessWidget {
                                                           iconSize: 30,
                                                           onPressed: () =>
                                                               _telaEditaVagas(
-                                                                  context),
+                                                                  context,
+                                                                  doc.id,
+                                                                  doc['cargo'],
+                                                                  doc['tipo'],
+                                                                  doc['local'],
+                                                                  doc['modelo'],
+                                                                  doc['descricao']
+                                                                ),
                                                         ),
                                                       ),
                                                       Icon(
