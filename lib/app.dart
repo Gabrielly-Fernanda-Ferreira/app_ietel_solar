@@ -108,7 +108,7 @@ class _AppState extends State<App> {
   }
 
 
-  final _nivel = 1;
+  final _nivel = 0;
 
   @override
   Widget build(BuildContext context) {

@@ -37,6 +37,9 @@ const listaTitulo =
 const lista =
     TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400);
 
+const listaCurriculo =
+    TextStyle(color: Color(0xFF082b59), fontSize: 14, fontWeight: FontWeight.w500);
+
 const listaDescricao =
     TextStyle(color: Color(0xFF082b59), fontSize: 14, fontWeight: FontWeight.w600);
   

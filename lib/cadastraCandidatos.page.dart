@@ -17,6 +17,12 @@ var _txtCidade = '';
 var _txtEmail = '';
 var _txtLinkedin = '';
 var _txtMensagem = '';
+var nome;
+var nomeArquivo = '';
+var caminho;
+var path;
+var read;
+var metadata;
 
 class CadastraCandidatosPage extends StatefulWidget {
   var id_vaga;
@@ -29,7 +35,10 @@ class CadastraCandidatosPage extends StatefulWidget {
 class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
   final _formKey = GlobalKey<FormState>();
 
-  void _onSaved(BuildContext context) {
+  FirebaseStorage storage = FirebaseStorage.instance;
+  final ImagePicker _picker = ImagePicker();
+
+  Future _onSaved(BuildContext context) async {
     if (_txtNome.isEmpty ||
         _txtCPF.isEmpty ||
         _txtTelefone.isEmpty ||
@@ -38,6 +47,7 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
         _txtEmail.isEmpty ||
         !_txtEmail.contains("@") ||
         _txtLinkedin.isEmpty ||
+        nomeArquivo.isEmpty ||
         _txtMensagem.isEmpty) {
       const snackBar = SnackBar(
         content: Text('Preencha todos os campos !'),
@@ -47,55 +57,61 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
 
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
-      FirebaseFirestore.instance.collection('candidatos').add({
-        'id_vaga': widget.id_vaga,
-        'nome': _txtNome,
-        'cpf': _txtCPF,
-        'telefone': _txtTelefone,
-        'cidade': _txtCidade,
-        'email': _txtEmail,
-        'linkedin': _txtLinkedin,
-        'mensagem': _txtMensagem
-      });
+      try {
+        metadata = SettableMetadata(
+          contentType: 'image',
+          customMetadata: {'picked-file-path': path},
+        );
 
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Cadastro realizado com sucesso !'),
-        backgroundColor: Colors.green,
-        behavior: SnackBarBehavior.floating,
-      ));
+        FirebaseStorage.instance
+            .ref()
+            .child(caminho)
+            .putData(await read, metadata);
 
-      Navigator.pop(context);
+        FirebaseFirestore.instance.collection('candidatos').add({
+          'id_vaga': widget.id_vaga,
+          'nome': _txtNome,
+          'cpf': _txtCPF,
+          'telefone': _txtTelefone,
+          'cidade': _txtCidade,
+          'email': _txtEmail,
+          'linkedin': _txtLinkedin,
+          'curriculo': nomeArquivo,
+          'mensagem': _txtMensagem
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Cadastro realizado com sucesso !'),
+          backgroundColor: Colors.green,
+          behavior: SnackBarBehavior.floating,
+        ));
+
+        Navigator.pop(context);
+      } catch (e) {
+        const snackBar = SnackBar(
+          content: Text('Erro ! Tente novamente mais tarde...'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
     }
   }
 
-  FirebaseStorage storage = FirebaseStorage.instance;
-  File? _foto;
-  final ImagePicker _picker = ImagePicker();
-
   Future selecionarCurriculo() async {
     final pegaImg = await _picker.pickImage(source: ImageSource.gallery);
+   
+    if (pegaImg != null) {
+      nomeArquivo = pegaImg.name;
+      nome = File(pegaImg.name);
+      caminho = 'files/$nome';
+      path = pegaImg.path;
+      read = pegaImg.readAsBytes();
 
-    setState(() {
-      if (pegaImg != null) {
-        _foto = File(pegaImg.path);
-        uploadFile();
-      } else {
-        print('Nenhuma imagem selecionada !');
-      }
-    });
-  }
-
-  Future uploadFile() async {
-    if (_foto == null) return;
-
-    final nome = basename(_foto!.path);
-    final caminho = 'files/$nome';
-
-    try {
-      final img = storage.ref(caminho).child('file/');
-      await img.putFile(_foto!);
-    } catch (e) {
-      print(e);
+      setState(() {
+        
+      });
     }
   }
 
@@ -508,6 +524,8 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
                     Padding(
                       padding: EdgeInsets.only(left: 15, right: 15, top: 15),
                       child: TextFormField(
+                        initialValue: nomeArquivo,
+                        showCursor: false,
                         onTap: () => selecionarCurriculo(),
                         cursorColor: Color(0xFF082b59),
                         cursorWidth: 1.5,
@@ -532,8 +550,29 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
                               Radius.circular(10),
                             ),
                           ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
                         ),
-                        keyboardType: TextInputType.text,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (curriculo) => curriculo!.isEmpty
+                            ? 'Anexe um currículo válido !'
+                            : null,
                       ),
                     ),
 
