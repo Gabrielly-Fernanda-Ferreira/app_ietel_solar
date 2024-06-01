@@ -60,7 +60,6 @@ class _AppState extends State<App> {
   Future<Position> _pegarClima() async {
     bool serviceEnabled;
     LocationPermission permission;
-    var position;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
@@ -76,26 +75,27 @@ class _AppState extends State<App> {
       if (permission == LocationPermission.denied) {
         return Future.error("Acesso a localização negado !");
       }
-    } else {
-      var position = await Geolocator.getCurrentPosition();
-
-      var response = await http.get(Uri.parse(
-          'https://nominatim.openstreetmap.org/reverse?lat=${position.latitude}&lon=${position.longitude}&format=json'));
-
-      cidade = jsonDecode(response.body)['address']['town'];
-
-      var url = await http.get(Uri.parse(
-          'https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&units=metric'));
-
-      nascer_sol =
-          getClockInUtcPlus3Hours(jsonDecode(url.body)['sys']['sunrise'] as int);
-      por_sol =
-          getClockInUtcPlus3Hours(jsonDecode(url.body)['sys']['sunset'] as int);
-      temperatura = jsonDecode(url.body)['main']['temp'];
-      umidade = jsonDecode(url.body)['main']['humidity'];
-
-      setState(() {});
     }
+    
+    var position = await Geolocator.getCurrentPosition();
+
+    var response = await http.get(Uri.parse(
+        'https://nominatim.openstreetmap.org/reverse?lat=${position.latitude}&lon=${position.longitude}&format=json'));
+
+    cidade = jsonDecode(response.body)['address']['town'];
+
+    var url = await http.get(Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&units=metric'));
+
+    nascer_sol =
+        getClockInUtcPlus3Hours(jsonDecode(url.body)['sys']['sunrise'] as int);
+    por_sol =
+        getClockInUtcPlus3Hours(jsonDecode(url.body)['sys']['sunset'] as int);
+    temperatura = jsonDecode(url.body)['main']['temp'];
+    umidade = jsonDecode(url.body)['main']['humidity'];
+
+    setState(() {});
+    
 
     return position;
   }
