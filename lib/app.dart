@@ -108,7 +108,7 @@ class _AppState extends State<App> {
   }
 
 
-  final _nivel = 0;
+  final _nivel = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -530,19 +530,7 @@ class _AppState extends State<App> {
 
                 //Acesso de Administrador
                 else ...[
-                  //Funcionamento
-                  ListTile(
-                    leading: const Icon(Icons.sunny, color: Color(0xFFF58934)),
-                    title: const Text("Funcionamento", style: menu),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const FuncionamentoPage()));
-                    },
-                  ),
-
+                 
                   //Calculadora Solar
                   ListTile(
                     leading:
@@ -609,6 +597,19 @@ class _AppState extends State<App> {
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   const ListaManuntencao()));
+                    },
+                  ),
+
+                  //Lista de Ordens de Serviço
+                  ListTile(
+                    leading: const Icon(Icons.menu_book, color: Color(0xFFF58934)),
+                    title: const Text("Lista de Ordens de Serviço", style: menu),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const ListaOrdemDeServico()));
                     },
                   ),
 
