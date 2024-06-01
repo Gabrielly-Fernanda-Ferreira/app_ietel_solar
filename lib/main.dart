@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:ietel_solar/app.dart';
 
 const firebaseConfig = FirebaseOptions(
@@ -10,7 +11,7 @@ const firebaseConfig = FirebaseOptions(
     messagingSenderId: "271234920509",
     appId: "1:271234920509:web:bca90e85068cb6cb86fa54");
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: firebaseConfig);
   runApp(const App());
