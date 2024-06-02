@@ -23,10 +23,7 @@ import 'cadastraOrcamento.page.dart';
 import 'agendamentoOrcamento.dart';
 import 'listaManutencao.page.dart';
 import 'listaOrcamento.page.dart';
-
-import 'package:ietel_solar/os/editarOrdemDeServico.dart';
 import 'package:ietel_solar/os/listaOrdemDeServico.dart';
-import 'package:ietel_solar/os/ordemDeServico.page.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -73,9 +70,7 @@ class App extends StatelessWidget {
         "/listaManutencao": (context) => ListaManuntencao(),
         "/listaOrcamento": (context) => const ListaOrcamento(),
         "/cadastraOrcamento": (context) => const CadastroOrc(),
-        "/ordemDeServico": (context) => const OrdemDeServicoPage(),
-        "/listaOS": (context) => const ListaOrdemDeServico(),
-        "/editarOS": (context) => const EditarOrdemDeServicoPage(),
+        "/listaOS": (context) => ListaOrdemDeServico(),
         "/agendamentoOrcamento": (context) => const AgendamentoOrcamento()
       },
       initialRoute: '/login',
