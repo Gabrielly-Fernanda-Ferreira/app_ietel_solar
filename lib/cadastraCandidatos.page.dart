@@ -175,6 +175,7 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "Nome",
+                          prefixIcon: Icon(Icons.person),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0xFF082b59),
@@ -233,6 +234,7 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "CPF",
+                          prefixIcon: Icon(Icons.portrait),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0xFF082b59),
@@ -295,6 +297,7 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "Telefone",
+                          prefixIcon: Icon(Icons.local_phone),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0xFF082b59),
@@ -357,6 +360,7 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "Cidade",
+                          prefixIcon: Icon(Icons.location_city),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0xFF082b59),
@@ -415,6 +419,7 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "E-mail",
+                          prefixIcon: Icon(Icons.email),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0xFF082b59),
@@ -475,6 +480,8 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "LinkedIn",
+                          prefixIcon: Icon(Icons.task_sharp),
+                          
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0xFF082b59),
@@ -591,6 +598,7 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "Mensagem",
+                          prefixIcon: Icon(Icons.message),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0xFF082b59),
