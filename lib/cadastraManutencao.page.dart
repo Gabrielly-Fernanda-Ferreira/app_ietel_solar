@@ -93,6 +93,7 @@ class CadastraManutencao extends State<CadastroMan> {
                                         fontSize: 14, color: Colors.black),
                                     decoration: InputDecoration(
                                         hintText: "Nome",
+                                      prefixIcon: Icon(Icons.person),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -151,6 +152,7 @@ class CadastraManutencao extends State<CadastroMan> {
                                     decoration: const InputDecoration(
                                         counterText: '',
                                         hintText: "CPF",
+                                      prefixIcon: Icon(Icons.portrait),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -216,6 +218,7 @@ class CadastraManutencao extends State<CadastroMan> {
                                     decoration: const InputDecoration(
                                         counterText: '',
                                         hintText: "Telefone",
+                                      prefixIcon: Icon(Icons.local_phone),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -280,6 +283,7 @@ class CadastraManutencao extends State<CadastroMan> {
                                         fontSize: 14, color: Colors.black),
                                     decoration: InputDecoration(
                                         hintText: "Endereço",
+                                      prefixIcon: Icon(Icons.location_on),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -341,6 +345,7 @@ class CadastraManutencao extends State<CadastroMan> {
                                         fontSize: 14, color: Colors.black),
                                     decoration: InputDecoration(
                                         hintText: "Bairro",
+                                      prefixIcon: Icon(Icons.house),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -404,6 +409,7 @@ class CadastraManutencao extends State<CadastroMan> {
                                     decoration: InputDecoration(
                                         counterText: '',
                                         hintText: "Número",
+                                      prefixIcon: Icon(Icons.where_to_vote),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -466,6 +472,7 @@ class CadastraManutencao extends State<CadastroMan> {
                                     decoration: const InputDecoration(
                                         counterText: '',
                                         hintText: "CEP",
+                                      prefixIcon: Icon(Icons.share_location),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -530,6 +537,7 @@ class CadastraManutencao extends State<CadastroMan> {
                                         fontSize: 14, color: Colors.black),
                                     decoration: InputDecoration(
                                         hintText: "Cidade",
+                                      prefixIcon: Icon(Icons.location_city),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
