@@ -65,6 +65,7 @@ class CalculadoraPage extends StatelessWidget {
                       style: TextStyle(fontSize: 14, color: Colors.black),
                       decoration: InputDecoration(
                         hintText: "CEP",
+                        prefixIcon: Icon(Icons.share_location),                    
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -117,6 +118,7 @@ class CalculadoraPage extends StatelessWidget {
                       style: TextStyle(fontSize: 14, color: Colors.black),
                       decoration: InputDecoration(
                         hintText: "Valor gasto com a energia",
+                        prefixIcon: Icon(Icons.attach_money),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
