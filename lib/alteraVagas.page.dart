@@ -124,6 +124,7 @@ class _AlteraVagasState extends State<AlteraVagasPage> {
                               fontSize: 14, color: Colors.black),
                           decoration: const InputDecoration(
                               hintText: "Cargo",
+                            prefixIcon: Icon(Icons.business_center),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF082b59),
@@ -228,6 +229,7 @@ class _AlteraVagasState extends State<AlteraVagasPage> {
                               fontSize: 14, color: Colors.black),
                           decoration: const InputDecoration(
                               hintText: "Local",
+                            prefixIcon: Icon(Icons.add_location),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF082b59),
@@ -334,6 +336,7 @@ class _AlteraVagasState extends State<AlteraVagasPage> {
                               fontSize: 14, color: Colors.black),
                           decoration: const InputDecoration(
                               hintText: "Descrição",
+                            prefixIcon: Icon(Icons.description),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF082b59),
