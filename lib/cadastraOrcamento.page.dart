@@ -69,6 +69,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                       style: TextStyle(fontSize: 14, color: Colors.black),
                       decoration: InputDecoration(
                         hintText: "Nome",
+                        prefixIcon: Icon(Icons.person),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -103,6 +104,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                       decoration: const InputDecoration(
                         counterText: '',
                         hintText: "CPF",
+                        prefixIcon: Icon(Icons.portrait),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -140,6 +142,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                       decoration: const InputDecoration(
                         counterText: '',
                         hintText: "Telefone",
+                        prefixIcon: Icon(Icons.local_phone),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -175,6 +178,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                       style: TextStyle(fontSize: 14, color: Colors.black),
                       decoration: InputDecoration(
                         hintText: "Endereço",
+                        prefixIcon: Icon(Icons.location_on),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -207,6 +211,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                       style: TextStyle(fontSize: 14, color: Colors.black),
                       decoration: InputDecoration(
                         hintText: "Bairro",
+                        prefixIcon: Icon(Icons.house),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -241,6 +246,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                       decoration: InputDecoration(
                         counterText: '',
                         hintText: "Número",
+                        prefixIcon: Icon(Icons.where_to_vote),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -275,6 +281,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                       decoration: const InputDecoration(
                         counterText: '',
                         hintText: "CEP",
+                        prefixIcon: Icon(Icons.share_location),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -310,6 +317,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                       style: TextStyle(fontSize: 14, color: Colors.black),
                       decoration: InputDecoration(
                         hintText: "Cidade",
+                        prefixIcon: Icon(Icons.location_on),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -345,6 +353,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         hintText: "Data",
+                        prefixIcon: Icon(Icons.calendar_month),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -384,6 +393,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                       decoration: const InputDecoration(
                         counterText: '',
                         hintText: "Horário",
+                        prefixIcon: Icon(Icons.access_time),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
