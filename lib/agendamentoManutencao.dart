@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AgendamentoManu extends StatefulWidget {
-  const AgendamentoManu({super.key});
+class AgendamentoManutencao extends StatefulWidget {
+  const AgendamentoManutencao({super.key});
 
   @override
-  AgendamentoManutencao createState() => AgendamentoManutencao();
+  State<AgendamentoManutencao> createState() => AgendamentoManu();
 }
 
-class AgendamentoManutencao extends State<AgendamentoManu> {
+class AgendamentoManu extends State<AgendamentoManutencao> {
   final TextEditingController _dataController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
 
@@ -89,7 +89,7 @@ class AgendamentoManutencao extends State<AgendamentoManu> {
                             Radius.circular(10),
                           ),
                         ),
-                        prefixIcon: Icon(Icons.date_range)),
+                        ),
                     readOnly: true,
                     onTap: () {
                       _selectDate(context);

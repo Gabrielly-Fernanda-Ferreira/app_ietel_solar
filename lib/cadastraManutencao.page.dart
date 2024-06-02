@@ -19,14 +19,14 @@ var _txtData = '';
 var _horarios = ['1', '2'];
 var _txtHorario = '';
 
-class CadastroMan extends StatefulWidget {
-  CadastroMan({super.key});
+class CadastraManutencao extends StatefulWidget {
+  CadastraManutencao({super.key});
 
   @override
-  CadastraManutencao createState() => CadastraManutencao();
+  State<CadastraManutencao> createState() => CadastraManu();
 }
 
-class CadastraManutencao extends State<CadastroMan> {
+class CadastraManu extends State<CadastraManutencao> {
   final _formKey = GlobalKey<FormState>();
   final firestore = FirebaseFirestore.instance;
 

@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+
 import 'login.page.dart';
 import 'cadastraUser.page.dart';
 import 'editaUser.page.dart';
@@ -16,14 +18,11 @@ import 'calculadora.page.dart';
 import 'cadastraVagas.page.dart';
 import 'listaVagasAdm.page.dart';
 import 'listaVagas.page.dart';
-import 'alteraVagas.page.dart';
-import 'cadastraCandidatos.page.dart';
-import 'listaCandidatos.page.dart';
 
-import 'package:ietel_solar/cadastoOrcamento.page.dart';
-import 'package:ietel_solar/agendamentoOrcamento.dart';
-import 'package:ietel_solar/listaManutencao.page.dart';
-import 'package:ietel_solar/listaOrcamento.page.dart';
+import 'cadastraOrcamento.page.dart';
+import 'agendamentoOrcamento.dart';
+import 'listaManutencao.page.dart';
+import 'listaOrcamento.page.dart';
 
 import 'package:ietel_solar/os/editarOrdemDeServico.dart';
 import 'package:ietel_solar/os/listaOrdemDeServico.dart';
@@ -59,23 +58,19 @@ class App extends StatelessWidget {
 
       routes: {
         "/login": (context) => LoginPage(),
-        // "/telaInicial": (context) => TelaInicial(),
         "/contato": (context) => const ContatoPage(),
         "/agendamentoManutencao": (context) => const AgendamentoManutencao(),
-        "/cadastraManutencao": (context) => const CadastraManutencaoPage(),
+        "/cadastraManutencao": (context) => CadastraManutencao(),
         "/calculadora": (context) => const CalculadoraPage(),
         "/resultado": (context) => const ResultadoPage(),
         "/cadastraVagas": (context) => const CadastraVagasPage(),
-        "/listaVagasAdm": (context) => const ListaVagasAdmPage(),
-        "/listaVagas": (context) => const ListaVagasPage(),
-        "/alteraVagas": (context) => const AlteraVagasPage(),
-        "/cadastraCandidatos": (context) => const CadastraCandidatosPage(),
-        "/listaCandidatos": (context) => const ListaCandidatosPage(),
-        "/cadastraUser": (context) => CadastraUserPage(),
+        "/listaVagasAdm": (context) => ListaVagasAdmPage(),
+        "/listaVagas": (context) => ListaVagasPage(),
+        "/cadastraUser": (context) => const CadastraUserPage(),
         "/editaUser": (context) => const EditaUserPage(),
         "/funcionamento": (context) => const FuncionamentoPage(),
         "/empresa": (context) => const EmpresaPage(),
-        "/listaManutencao": (context) => const ListaManuntencao(),
+        "/listaManutencao": (context) => ListaManuntencao(),
         "/listaOrcamento": (context) => const ListaOrcamento(),
         "/cadastraOrcamento": (context) => const CadastroOrc(),
         "/ordemDeServico": (context) => const OrdemDeServicoPage(),
@@ -83,7 +78,6 @@ class App extends StatelessWidget {
         "/editarOS": (context) => const EditarOrdemDeServicoPage(),
         "/agendamentoOrcamento": (context) => const AgendamentoOrcamento()
       },
-      
       initialRoute: '/login',
     );
   }

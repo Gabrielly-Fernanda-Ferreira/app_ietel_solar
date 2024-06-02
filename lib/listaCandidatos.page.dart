@@ -19,7 +19,7 @@ class ListaCandidatosPage extends StatelessWidget {
       final url = await ref.getDownloadURL();
 
       //final downloadTask = ref.writeToFile(url);
-      print(ref);
+      //print(ref);
     } catch (e) {
       print(e);
     }
