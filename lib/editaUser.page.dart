@@ -50,6 +50,7 @@ class EditaUserPage extends StatelessWidget {
                     style: TextStyle(fontSize: 14, color: Colors.black),
                     decoration: InputDecoration(
                       hintText: "Digite o seu Nome",
+                      prefixIcon: Icon(Icons.person),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF082b59),
@@ -87,6 +88,7 @@ class EditaUserPage extends StatelessWidget {
                     style: TextStyle(fontSize: 14, color: Colors.black),
                     decoration: InputDecoration(
                       hintText: "Digite seu email",
+                      prefixIcon: Icon(Icons.email),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF082b59),
@@ -124,6 +126,7 @@ class EditaUserPage extends StatelessWidget {
                     style: TextStyle(fontSize: 14, color: Colors.black),
                     decoration: InputDecoration(
                       hintText: "Digite sua senha",
+                      prefixIcon: Icon(Icons.lock),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF082b59),
@@ -160,6 +163,7 @@ class EditaUserPage extends StatelessWidget {
                     style: TextStyle(fontSize: 14, color: Colors.black),
                     decoration: InputDecoration(
                       hintText: "Digite sua senha novamente",
+                      prefixIcon: Icon(Icons.lock),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF082b59),
