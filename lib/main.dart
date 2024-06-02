@@ -9,6 +9,7 @@ const firebaseConfig = FirebaseOptions(
     storageBucket: "userlist-413f7.appspot.com",
     messagingSenderId: "271234920509",
     appId: "1:271234920509:web:bca90e85068cb6cb86fa54");
+    measurementId: "G-C3JG9L1PC8");
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
