@@ -53,7 +53,10 @@ class ListaManuntencao extends StatelessWidget {
               Column(
                 children: [
                   StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: firestore.collection('manutencao').snapshots(),
+                      stream: firestore
+                          .collection('manutencao')
+                          .orderBy('dia')
+                          .snapshots(),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
                           return const CircularProgressIndicator();
@@ -64,38 +67,36 @@ class ListaManuntencao extends StatelessWidget {
                         return SizedBox(
                           height: 500,
                           child: ListView(children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: docs
-                                  .map(
-                                    (doc) => Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15, right: 15, top: 20),
-                                      child: InkWell(
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.9,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            border: Border.all(
-                                              color: const Color(0xFFF58934),
-                                              width: 1.0,
+                            Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: docs
+                                    .map(
+                                      (doc) => Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 15, right: 15, top: 20),
+                                        child: InkWell(
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.9,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                color: const Color(0xFFF58934),
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(6),
+                                              ),
                                             ),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                              Radius.circular(6),
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding: EdgeInsets.all(15.0),
-                                            child: Column(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: Row(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(15.0),
+                                              child: Column(
+                                                children: [
+                                                  Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .center,
@@ -106,116 +107,229 @@ class ListaManuntencao extends StatelessWidget {
                                                       )
                                                     ],
                                                   ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        'CPF: ' + doc['cpf'],
-                                                        style: lista,
-                                                      ),
-                                                    ],
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 10),
+                                                    child: Row(
+                                                      children: [
+                                                        Flexible(
+                                                            child: Column(
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  'CPF: ',
+                                                                  style:
+                                                                      listaCampos,
+                                                                ),
+                                                                Text(
+                                                                  doc['cpf'],
+                                                                  style: lista,
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .justify,
+                                                                ),
+                                                              ],
+                                                            )
+                                                          ],
+                                                        )),
+                                                        Flexible(
+                                                          child: Column(
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "Telefone: ",
+                                                                    style:
+                                                                        listaCampos,
+                                                                  ),
+                                                                  Text(
+                                                                    doc['telefone'],
+                                                                    style:
+                                                                        lista,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .justify,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        'Telefone: ' +
-                                                            doc['telefone'],
-                                                        style: lista,
-                                                      )
-                                                    ],
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 15),
+                                                    child: Row(
+                                                      children: [
+                                                        Flexible(
+                                                          child: Column(
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "Bairro: ",
+                                                                    style:
+                                                                        listaCampos,
+                                                                  ),
+                                                                  Text(
+                                                                    doc['bairro'],
+                                                                    style:
+                                                                        lista,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .justify,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Flexible(
+                                                          child: Column(
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "Número: ",
+                                                                    style:
+                                                                        listaCampos,
+                                                                  ),
+                                                                  Text(
+                                                                    doc['número'],
+                                                                    style:
+                                                                        lista,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .justify,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        'Bairro: ' +
-                                                            doc['bairro'],
-                                                        style: lista,
-                                                      )
-                                                    ],
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 15),
+                                                    child: Row(
+                                                      children: [
+                                                        Flexible(
+                                                          child: Column(
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "CEP: ",
+                                                                    style:
+                                                                        listaCampos,
+                                                                  ),
+                                                                  Text(
+                                                                    doc['cep'],
+                                                                    style:
+                                                                        lista,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .justify,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Flexible(
+                                                          child: Column(
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "Cidade: ",
+                                                                    style:
+                                                                        listaCampos,
+                                                                  ),
+                                                                  Text(
+                                                                    doc['cidade'],
+                                                                    style:
+                                                                        lista,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .justify,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        'Número: ' +
-                                                            doc['número'],
-                                                        style: lista,
-                                                      )
-                                                    ],
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 15),
+                                                    child: Row(
+                                                      children: [
+                                                        Flexible(
+                                                          child: Column(
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "Data: ",
+                                                                    style:
+                                                                        listaCampos,
+                                                                  ),
+                                                                  Text(
+                                                                    doc['dia'],
+                                                                    style:
+                                                                        lista,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .justify,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Flexible(
+                                                          child: Column(
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "Horário: ",
+                                                                    style:
+                                                                        listaCampos,
+                                                                  ),
+                                                                  Text(
+                                                                    doc['hora'],
+                                                                    style:
+                                                                        lista,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .justify,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        'CEP: ' + doc['cep'],
-                                                        style: lista,
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        'Cidade: ' +
-                                                            doc['cidade'],
-                                                        style: lista,
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        'Data: ' + doc['dia'],
-                                                        style: lista,
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        'Horário: ' +
-                                                            doc['hora'],
-                                                        style: lista,
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                  .toList(),
+                                    )
+                                    .toList(),
+                              ),
                             ),
                           ]),
                         );
