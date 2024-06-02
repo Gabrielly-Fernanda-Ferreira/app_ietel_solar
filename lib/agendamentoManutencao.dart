@@ -69,6 +69,8 @@ class AgendamentoManutencao extends State<AgendamentoManu> {
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                         hintText: "Data",
+                      prefixIcon: Icon(Icons.calendar_month),
+                      
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -108,6 +110,8 @@ class AgendamentoManutencao extends State<AgendamentoManu> {
                     decoration: const InputDecoration(
                       counterText: '',
                       hintText: "Horário",
+                      prefixIcon: Icon(Icons.access_time),
+
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF082b59),
