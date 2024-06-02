@@ -60,6 +60,7 @@ class AgendamentoOrcamento extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       hintText: "Data",
+                      prefixIcon: Icon(Icons.calendar_month),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF082b59),
@@ -97,6 +98,7 @@ class AgendamentoOrcamento extends StatelessWidget {
                     decoration: InputDecoration(
                       counterText: '',
                       hintText: "Horário",
+                      prefixIcon: Icon(Icons.access_time),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF082b59),
