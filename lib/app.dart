@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:ietel_solar/os/editarOrdemDeServico.dart';
+import 'package:ietel_solar/os/ordemDeServico.page.dart';
 
 import 'login.page.dart';
 import 'cadastraUser.page.dart';
@@ -71,7 +73,8 @@ class App extends StatelessWidget {
         "/listaOrcamento": (context) => const ListaOrcamento(),
         "/cadastraOrcamento": (context) => const CadastroOrc(),
         "/listaOS": (context) => ListaOrdemDeServico(),
-        "/agendamentoOrcamento": (context) => const AgendamentoOrcamento()
+        "/ordemDeServico": (context) => OrdemDeServicoPage(),
+        "/agendamentoOrcamento": (context) => const AgendamentoOrcamento(),
       },
       initialRoute: '/login',
     );
