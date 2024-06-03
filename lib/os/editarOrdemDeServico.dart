@@ -1,42 +1,65 @@
+// ignore_for_file: curly_braces_in_flow_control_structures, must_be_immutable, prefer_typing_uninitialized_variables
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ietel_solar/styles.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
+var _modelos = ['Tempo Integral', 'Estágio', 'Meio Período', 'Trainee'];
+
+var _tipos = ['Presencial', 'Online', 'Híbrido'];
 
 class EditarOrdemDeServicoPage extends StatefulWidget {
-  final String id; // Add this to receive the id of the job to edit
-
-  const EditarOrdemDeServicoPage({super.key, required this.id});
+  var id, cliente, cpf, telefone, endereco, tecnico, motivo, diagnostico, solucao;
+  EditarOrdemDeServicoPage({
+    required this.id,
+    required this.cliente,
+    required this.cpf,
+    required this.telefone,
+    required this.endereco,
+    required this.motivo,
+    required this.diagnostico,
+    required this.solucao,
+    super.key, required tecnico
+  });
 
   @override
   State<EditarOrdemDeServicoPage> createState() => _EditarOrdemDeServicoState();
 }
 
 class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
-  final firestore = FirebaseFirestore.instance;
   final _formKey = GlobalKey<FormState>();
 
-  String _cliente = '';
-  String _telefone = '';
-  String _endereco = '';
-  String _nomeDoTecnico = '';
-  String _motivoDaManutencao = '';
-  String _diagnostico = '';
-  String _solucao = '';
-  String _itens = '';
-
   void _onSaved(BuildContext context) {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      firestore.collection('ordensDeServico').doc(widget.id).update({
-        'cliente': _cliente,
-        'telefone': _telefone,
-        'endereco': _endereco,
-        'nomeDoTecnico': _nomeDoTecnico,
-        'motivoDaManutencao': _motivoDaManutencao,
-        'diagnostico': _diagnostico,
-        'solucao': _solucao,
-        'itens': _itens,
-      }).then((value) => Navigator.pop(context));
+    if (widget.motivo.isEmpty || widget.diagnostico.isEmpty || widget.solucao.isEmpty) {
+      const snackBar = SnackBar(
+        content: Text('Preencha todos os campos !'),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      FirebaseFirestore.instance
+          .collection('os')
+          .doc(widget.id)
+          .set({
+        'cliente': widget.cliente,
+        'cpf': widget.cpf,
+        'telefone': widget.telefone,
+        'endereco': widget.endereco,
+        'tecnico': widget.tecnico,
+        'motivo': widget.motivo,
+        'diagnostico': widget.diagnostico,
+        'solucao': widget.solucao,
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Alteração realizada com sucesso !'),
+        backgroundColor: Colors.green,
+        behavior: SnackBarBehavior.floating,
+      ));
+
+      Navigator.pop(context);
     }
   }
 
@@ -51,405 +74,562 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       backgroundColor: const Color(0xFF082b59),
-      body: StreamBuilder<DocumentSnapshot>(
-        stream: firestore.collection('ordensDeServico').doc(widget.id).snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-          if (!snapshot.hasData) return const CircularProgressIndicator();
-          DocumentSnapshot document = snapshot.data!;
-          _cliente = document['cliente'];
-          _telefone = document['telefone'];
-          _endereco = document['endereco'];
-          _nomeDoTecnico = document['nomeDoTecnico'];
-          _motivoDaManutencao = document['motivoDaManutencao'];
-          _diagnostico = document['diagnostico'];
-          _solucao = document['solucao'];
-          _itens = document['itens'];
-
-          return Form(
-            key: _formKey,
-            child: ListView(
-              children: [
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(6),
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.only(top: 30),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Altere a ",
-                                  style: titulo,
-                                ),
-                                Text(
-                                  "Ordem de Serviço",
-                                  style: palavraChave,
-                                ),
-                                Text(
-                                  ":",
-                                  style: titulo,
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          //Cargo
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
-                            child: TextFormField(
-                              initialValue: _cliente,
-                              cursorColor: Color(0xFF082b59),
-                              cursorWidth: 1.5,
-                              style: TextStyle(fontSize: 14, color: Colors.black),
-                              decoration: InputDecoration(
-                                hintText: "Cliente",
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFF082b59),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFF58934),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Campo obrigatório';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) => _cliente = value!,
-                              keyboardType: TextInputType.text,
-                            ),
-                          ),
-
-                          //Local
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                            child: TextFormField(
-                              initialValue: _telefone,
-                              cursorColor: Color(0xFF082b59),
-                              cursorWidth: 1.5,
-                              style: TextStyle(fontSize: 14, color: Colors.black),
-                              decoration: InputDecoration(
-                                hintText: "CPF OU CNPJ",
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFF082b59),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFF58934),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Campo obrigatório';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) => _telefone = value!,
-                              keyboardType: TextInputType.text,
-                            ),
-                          ),
-
-                          //Modelo
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                            child: TextFormField(
-                              initialValue: _endereco,
-                              cursorColor: Color(0xFF082b59),
-                              cursorWidth: 1.5,
-                              style: TextStyle(fontSize: 14, color: Colors.black),
-                              decoration: InputDecoration(
-                                hintText: "Endereço",
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFF082b59),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFF58934),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Campo obrigatório';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) => _endereco = value!,
-                              keyboardType: TextInputType.text,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                            child: TextFormField(
-                              initialValue: _nomeDoTecnico,
-                              cursorColor: Color(0xFF082b59),
-                              cursorWidth: 1.5,
-                              style: TextStyle(fontSize: 14, color: Colors.black),
-                              decoration: InputDecoration(
-                                hintText: "Nome do Técnico",
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFF082b59),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFF58934),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Campo obrigatório';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) => _nomeDoTecnico = value!,
-                              keyboardType: TextInputType.text,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                            child: TextFormField(
-                              initialValue: _motivoDaManutencao,
-                              cursorColor: Color(0xFF082b59),
-                              cursorWidth: 1.5,
-                              style: TextStyle(fontSize: 14, color: Colors.black),
-                              decoration: InputDecoration(
-                                hintText: "Motivo da Manutenção",
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFF082b59),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFF58934),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Campo obrigatório';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) => _motivoDaManutencao = value!,
-                              keyboardType: TextInputType.text,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                            child: TextFormField(
-                              initialValue: _diagnostico,
-                              cursorColor: Color(0xFF082b59),
-                              cursorWidth: 1.5,
-                              style: TextStyle(fontSize: 14, color: Colors.black),
-                              decoration: InputDecoration(
-                                hintText: "Diagnostico",
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFF082b59),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFF58934),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Campo obrigatório';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) => _diagnostico = value!,
-                              keyboardType: TextInputType.text,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                            child: TextFormField(
-                              initialValue: _solucao,
-                              cursorColor: Color(0xFF082b59),
-                              cursorWidth: 1.5,
-                              style: TextStyle(fontSize: 14, color: Colors.black),
-                              decoration: InputDecoration(
-                                hintText: "Solução",
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFF082b59),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFF58934),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Campo obrigatório';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) => _solucao = value!,
-                              keyboardType: TextInputType.text,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                            child: TextFormField(
-                              initialValue: _itens,
-                              cursorColor: Color(0xFF082b59),
-                              cursorWidth: 1.5,
-                              style: TextStyle(fontSize: 14, color: Colors.black),
-                              decoration: InputDecoration(
-                                hintText: "Itens",
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFF082b59),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFF58934),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Campo obrigatório';
-                                }
-                                return null;
-                              },
-                              onSaved: (value) => _itens = value!,
-                              keyboardType: TextInputType.text,
-                            ),
-                          ),
-
-                          //Botão
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15, top: 30),
-                            child: SizedBox(
-                              width: 200,
-                              height: 36,
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                  shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                                    (Set<MaterialState> states) {
-                                      if (states.contains(MaterialState.hovered))
-                                        return const Color(0xFF082b59);
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                                child: const Text(
-                                  "ALTERAR",
-                                  style: button,
-                                ),
-                                onPressed: () => _onSaved(context),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+      body: ListView(
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(6),
                   ),
                 ),
-              ],
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(top: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Altere a ",
+                              style: titulo,
+                            ),
+                            Text(
+                              "Ordem de Serviço",
+                              style: palavraChave,
+                            ),
+                            Text(
+                              ":",
+                              style: titulo,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      //Cargo
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 20),
+                        child: TextFormField(
+                          initialValue: widget.cliente,
+                          onChanged: (String? novoItemSelecionado) {
+                            setState(() {
+                              widget.cliente = novoItemSelecionado!;
+                            });
+                          },
+                          cursorColor: const Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.black),
+                          decoration: const InputDecoration(
+                              hintText: "Cliente",
+                            prefixIcon: Icon(Icons.business_center),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (cargo) =>
+                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+
+                      //Tipo
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 20),
+                        child: TextFormField(
+                          initialValue: widget.cpf,
+                          onChanged: (String? novoItemSelecionado) {
+                            setState(() {
+                              widget.cpf = novoItemSelecionado!;
+                            });
+                          },
+                          cursorColor: const Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.black),
+                          decoration: const InputDecoration(
+                              hintText: "CPF",
+                            prefixIcon: Icon(Icons.business_center),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (cargo) =>
+                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+
+                      //Local
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 15),
+                        child: TextFormField(
+                          initialValue: widget.telefone,
+                          onChanged: (String? novoItemSelecionado) {
+                            setState(() {
+                              widget.telefone = novoItemSelecionado!;
+                            });
+                          },
+                          cursorColor: const Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.black),
+                          decoration: const InputDecoration(
+                              hintText: "Telefone",
+                            prefixIcon: Icon(Icons.add_location),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (local) =>
+                              local!.isEmpty ? 'Preencha o campo !' : null,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+
+                      //Modelo
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 20),
+                        child: TextFormField(
+                          initialValue: widget.endereco,
+                          onChanged: (String? novoItemSelecionado) {
+                            setState(() {
+                              widget.endereco = novoItemSelecionado!;
+                            });
+                          },
+                          cursorColor: const Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.black),
+                          decoration: const InputDecoration(
+                              hintText: "Endereço",
+                            prefixIcon: Icon(Icons.business_center),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (cargo) =>
+                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 20),
+                        child: TextFormField(
+                          initialValue: widget.tecnico,
+                          onChanged: (String? novoItemSelecionado) {
+                            setState(() {
+                              widget.tecnico = novoItemSelecionado!;
+                            });
+                          },
+                          cursorColor: const Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.black),
+                          decoration: const InputDecoration(
+                              hintText: "Tecnico",
+                            prefixIcon: Icon(Icons.business_center),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (cargo) =>
+                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      //Descrição
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 20),
+                        child: TextFormField(
+                          initialValue: widget.motivo,
+                          onChanged: (String? novoItemSelecionado) {
+                            setState(() {
+                              widget.motivo = novoItemSelecionado!;
+                            });
+                          },
+                          cursorColor: const Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.black),
+                          decoration: const InputDecoration(
+                              hintText: "Motivo",
+                            prefixIcon: Icon(Icons.business_center),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (cargo) =>
+                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 20),
+                        child: TextFormField(
+                          initialValue: widget.diagnostico,
+                          onChanged: (String? novoItemSelecionado) {
+                            setState(() {
+                              widget.diagnostico = novoItemSelecionado!;
+                            });
+                          },
+                          cursorColor: const Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.black),
+                          decoration: const InputDecoration(
+                              hintText: "Diagnostico",
+                            prefixIcon: Icon(Icons.business_center),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (cargo) =>
+                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 20),
+                        child: TextFormField(
+                          initialValue: widget.solucao,
+                          onChanged: (String? novoItemSelecionado) {
+                            setState(() {
+                              widget.solucao = novoItemSelecionado!;
+                            });
+                          },
+                          cursorColor: const Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.black),
+                          decoration: const InputDecoration(
+                              hintText: "Solução",
+                            prefixIcon: Icon(Icons.business_center),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (cargo) =>
+                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      //Botão
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 30),
+                        child: SizedBox(
+                          width: 200,
+                          height: 36,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.hovered))
+                                    return const Color(0xFF082b59);
+                                  return null;
+                                },
+                              ),
+                            ),
+                            child: const Text(
+                              "ALTERAR",
+                              style: button,
+                            ),
+                            onPressed: () => _onSaved(context),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }
