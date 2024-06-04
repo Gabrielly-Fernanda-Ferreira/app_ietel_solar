@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AgendamentoManutencao extends StatefulWidget {
-  const AgendamentoManutencao({super.key});
+class AgendamentoManu extends StatefulWidget {
+  const AgendamentoManu({super.key});
 
   @override
-  State<AgendamentoManutencao> createState() => AgendamentoManu();
+  AgendamentoManutencao createState() => AgendamentoManutencao();
 }
 
-class AgendamentoManu extends State<AgendamentoManutencao> {
+class AgendamentoManutencao extends State<AgendamentoManu> {
   final TextEditingController _dataController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
 
@@ -69,8 +69,6 @@ class AgendamentoManu extends State<AgendamentoManutencao> {
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                         hintText: "Data",
-                      prefixIcon: Icon(Icons.calendar_month),
-                      
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF082b59),
@@ -89,7 +87,7 @@ class AgendamentoManu extends State<AgendamentoManutencao> {
                             Radius.circular(10),
                           ),
                         ),
-                        ),
+                        prefixIcon: Icon(Icons.date_range)),
                     readOnly: true,
                     onTap: () {
                       _selectDate(context);
@@ -110,8 +108,6 @@ class AgendamentoManu extends State<AgendamentoManutencao> {
                     decoration: const InputDecoration(
                       counterText: '',
                       hintText: "Horário",
-                      prefixIcon: Icon(Icons.access_time),
-
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF082b59),
@@ -185,6 +181,7 @@ class AgendamentoManu extends State<AgendamentoManutencao> {
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 30)),
+      // selectableDayPredicate: 
     );
     if (picked != null) {
       setState(() {

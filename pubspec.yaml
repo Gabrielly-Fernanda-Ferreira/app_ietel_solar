@@ -46,6 +46,8 @@ dependencies:
   http:
   geolocator: ^7.0.0
   image_picker: ^0.8.2
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:

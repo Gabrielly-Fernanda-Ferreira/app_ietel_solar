@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ietel_solar/os/editarOrdemDeServico.dart';
 import 'package:ietel_solar/os/ordemDeServico.page.dart';
@@ -27,15 +26,24 @@ import 'listaManutencao.page.dart';
 import 'listaOrcamento.page.dart';
 import 'package:ietel_solar/os/listaOrdemDeServico.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 class App extends StatelessWidget {
   App({super.key});
 
   @override
-  Widget build(BuildContext context){
-
-  return MaterialApp(
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData(
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('pt', ''),
+      ],
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
         useMaterial3: false,
         primarySwatch: MaterialColor(
           0xFFF58934,
@@ -51,14 +59,11 @@ class App extends StatelessWidget {
             900: Colors.orange[900]!,
           },
         ),
-    ),
-
-
-
+      ),
       routes: {
         "/login": (context) => LoginPage(),
         "/contato": (context) => const ContatoPage(),
-        "/agendamentoManutencao": (context) => const AgendamentoManutencao(),
+        "/agendamentoManutencao": (context) => const AgendamentoManu(),
         "/cadastraManutencao": (context) => CadastraManutencao(),
         "/calculadora": (context) => const CalculadoraPage(),
         "/resultado": (context) => const ResultadoPage(),
