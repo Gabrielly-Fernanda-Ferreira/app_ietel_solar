@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ietel_solar/os/editarOrdemDeServico.dart';
 import 'package:ietel_solar/os/ordemDeServico.page.dart';
 
 import 'login.page.dart';
@@ -63,7 +62,7 @@ class App extends StatelessWidget {
       routes: {
         "/login": (context) => LoginPage(),
         "/contato": (context) => const ContatoPage(),
-        "/agendamentoManutencao": (context) => const AgendamentoManu(),
+        "/agendamentoManutencao": (context) => const AgendamentoManutencao(),
         "/cadastraManutencao": (context) => CadastraManutencao(),
         "/calculadora": (context) => const CalculadoraPage(),
         "/resultado": (context) => const ResultadoPage(),

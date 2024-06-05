@@ -62,10 +62,11 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
           customMetadata: {'picked-file-path': path},
         );
 
-        FirebaseStorage.instance
-            .ref()
-            .child(caminho)
-            .putData(await read, metadata);
+        final ref = FirebaseStorage.instance.ref().child(caminho);
+
+        await ref.putData(await read, metadata);
+
+        String url = await ref.getDownloadURL();
 
         FirebaseFirestore.instance.collection('candidatos').add({
           'id_vaga': widget.id_vaga,
@@ -75,6 +76,7 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
           'cidade': _txtCidade,
           'email': _txtEmail,
           'linkedin': _txtLinkedin,
+          'url': url,
           'curriculo': nomeArquivo,
           'mensagem': _txtMensagem
         });
@@ -100,7 +102,7 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
 
   Future selecionarCurriculo() async {
     final pegaImg = await _picker.pickImage(source: ImageSource.gallery);
-   
+
     if (pegaImg != null) {
       nomeArquivo = pegaImg.name;
       nome = File(pegaImg.name);
@@ -108,9 +110,7 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
       path = pegaImg.path;
       read = pegaImg.readAsBytes();
 
-      setState(() {
-        
-      });
+      setState(() {});
     }
   }
 
@@ -481,7 +481,6 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
                         decoration: InputDecoration(
                           hintText: "LinkedIn",
                           prefixIcon: Icon(Icons.task_sharp),
-                          
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0xFF082b59),

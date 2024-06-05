@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, prefer_typing_uninitialized_variables, must_be_immutable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'styles.dart';
 
 class ListaCandidatosPage extends StatelessWidget {
@@ -11,23 +11,26 @@ class ListaCandidatosPage extends StatelessWidget {
 
   final firestore = FirebaseFirestore.instance;
 
-  Future mostrarImagem() async {
-    try {
-      Reference ref =
-          FirebaseStorage.instance.ref().child("files/File: 'empresa.jpg'");
+    void mostrarImagem(BuildContext context, arquivo) async {
 
-      final url = await ref.getDownloadURL();
+    if (await canLaunchUrl(Uri.parse(arquivo))) {
 
-      //final downloadTask = ref.writeToFile(url);
-      //print(ref);
-    } catch (e) {
-      print(e);
+      await launchUrl(Uri.parse(arquivo));
+
+    } else {
+
+      const snackBar = SnackBar(
+        content: Text('Não foi possível realizar o download !'),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    mostrarImagem();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -210,7 +213,9 @@ class ListaCandidatosPage extends StatelessWidget {
                                                                 ),
                                                                 InkWell(
                                                                   onTap: () =>
-                                                                      mostrarImagem(),
+                                                                      mostrarImagem(
+                                                                          context,
+                                                                          doc['url']),
                                                                   child: Text(
                                                                     doc['curriculo'],
                                                                     style:
