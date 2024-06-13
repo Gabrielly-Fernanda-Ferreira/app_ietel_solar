@@ -1,8 +1,88 @@
 import 'package:flutter/material.dart';
 import 'styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AgendamentoOrcamento extends StatelessWidget {
-  const AgendamentoOrcamento({super.key});
+class AgendamentoOrca extends StatefulWidget {
+  const AgendamentoOrca({super.key});
+
+  @override
+  AgendamentoOrcamento createState() => AgendamentoOrcamento();
+}
+
+class AgendamentoOrcamento extends State<AgendamentoOrca> {
+  final TextEditingController _dataController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 30)),
+      // selectableDayPredicate:
+    );
+    if (picked != null) {
+      setState(() {
+        _dataController.text = "${picked.day}/${picked.month}/${picked.year}";
+      });
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    TimeOfDay? timed = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+        builder: ((context, child) {
+          MaterialTapTargetSize tapTargetSize = MaterialTapTargetSize.padded;
+          TextDirection textDirection = TextDirection.ltr;
+          return Theme(
+              data: Theme.of(context)
+                  .copyWith(materialTapTargetSize: tapTargetSize),
+              child: Directionality(
+                  textDirection: textDirection,
+                  child: MediaQuery(
+                      data: MediaQuery.of(context)
+                          .copyWith(alwaysUse24HourFormat: false),
+                      child: Localizations.override(
+                        context: context,
+                        locale: const Locale('pt', 'BR'),
+                        child: child!,
+                      ))));
+        }));
+
+    if (timed != null) {
+      setState(() {
+        final localizations = MaterialLocalizations.of(context);
+        final formattedTimeOfDay = localizations.formatTimeOfDay(timed);
+        _timeController.text = formattedTimeOfDay;
+      });
+    }
+  }
+
+  void _registraManutencao(BuildContext context) async {
+    DocumentReference docRef =
+        await FirebaseFirestore.instance.collection('horarioOrcamento').add({
+      'data': _dataController.text,
+      'hora': _timeController.text,
+    });
+
+    String documentId = docRef.id;
+
+    await docRef.update({
+      'id': documentId,
+    });
+
+    // print(
+    //     'Document ID: $documentId');
+
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Cadastro realizado com sucesso !'),
+      backgroundColor: Colors.green,
+      behavior: SnackBarBehavior.floating,
+    ));
+
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +95,7 @@ class AgendamentoOrcamento extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       backgroundColor: const Color(0xFF082b59),
-      body:ListView(
-        children: [
-       Center(
+      body: Center(
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Container(
@@ -30,7 +108,7 @@ class AgendamentoOrcamento extends StatelessWidget {
             child: Column(
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -39,7 +117,7 @@ class AgendamentoOrcamento extends StatelessWidget {
                         style: titulo,
                       ),
                       Text(
-                        "Orçamentos",
+                        "Orçamento",
                         style: palavraChave,
                       ),
                       Text(
@@ -51,54 +129,56 @@ class AgendamentoOrcamento extends StatelessWidget {
                 ),
 
                 //Data
-                const Padding(
-                  padding: EdgeInsets.only(left: 15, right: 15, top: 30),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
                   child: TextField(
-                    cursorColor: Color(0xFF082b59),
+                    controller: _dataController,
+                    cursorColor: const Color(0xFF082b59),
                     cursorWidth: 1.5,
-                    style: TextStyle(fontSize: 14, color: Colors.black),
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      hintText: "Data",
-                      prefixIcon: Icon(Icons.calendar_month),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFF082b59),
-                          width: 2,
+                    decoration: const InputDecoration(
+                        hintText: "Data",
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF082b59),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
                         ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFFF58934),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
                         ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFFF58934),
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                    ),
+                        prefixIcon: Icon(Icons.date_range)),
+                    readOnly: true,
+                    onTap: () {
+                      _selectDate(context);
+                    },
                   ),
                 ),
 
                 //Horário
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                    top: 15,
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: TextField(
-                    cursorColor: Color(0xFF082b59),
+                    // controller: _timeController,
+                    cursorColor: const Color(0xFF082b59),
                     cursorWidth: 1.5,
-                    style: TextStyle(fontSize: 14, color: Colors.black),
+                    style: const TextStyle(fontSize: 14, color: Colors.black),
+                    controller: _timeController,
                     maxLength: 4,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       counterText: '',
                       hintText: "Horário",
-                      prefixIcon: Icon(Icons.access_time),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF082b59),
@@ -118,7 +198,10 @@ class AgendamentoOrcamento extends StatelessWidget {
                         ),
                       ),
                     ),
-                    keyboardType: TextInputType.text,
+                    readOnly: true,
+                    onTap: () {
+                      _selectTime(context);
+                    },
                   ),
                 ),
 
@@ -138,8 +221,9 @@ class AgendamentoOrcamento extends StatelessWidget {
                         ),
                         overlayColor: MaterialStateProperty.resolveWith<Color?>(
                           (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.hovered))
-                              return Color(0xFF082b59);
+                            if (states.contains(MaterialState.hovered)) {
+                              return const Color(0xFF082b59);
+                            }
                             return null;
                           },
                         ),
@@ -148,7 +232,9 @@ class AgendamentoOrcamento extends StatelessWidget {
                         "AGENDAR",
                         style: button,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        _registraManutencao(context);
+                      },
                     ),
                   ),
                 ),
@@ -157,8 +243,6 @@ class AgendamentoOrcamento extends StatelessWidget {
           ),
         ),
       ),
-      ],
-      )
     );
   }
 }

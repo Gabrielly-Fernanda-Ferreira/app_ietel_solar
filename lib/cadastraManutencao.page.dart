@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, collection_methods_unrelated_type
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,9 +14,7 @@ var _txtBairro = '';
 var _txtNumero = '';
 var _txtCep = '';
 var _txtCidade = '';
-var _datas = ['Presencial', 'Online', 'Híbrido'];
 var _txtData = '';
-var _horarios = ['1', '2'];
 var _txtHorario = '';
 
 class CadastraManutencao extends StatefulWidget {
@@ -29,6 +27,133 @@ class CadastraManutencao extends StatefulWidget {
 class CadastraManu extends State<CadastraManutencao> {
   final _formKey = GlobalKey<FormState>();
   final firestore = FirebaseFirestore.instance;
+  final TextEditingController _dataController = TextEditingController();
+  List<String> data = [];
+  List<String> hora = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    final datas =
+        await firestore.collection('horarioManutencao').orderBy('data').get();
+    final docs = datas.docs;
+
+    final dataIn = docs.map((doc) => doc['data']! as String).toList();
+
+    setState(() {
+      data = dataIn;
+    });
+
+    // print(dataIn);
+    // print(data);
+  }
+
+  Future<void> _loadHora() async {
+    final horas = await firestore
+        .collection('horarioManutencao')
+        .where('data', isEqualTo: _dataController.text)
+        .get();
+    final docs = horas.docs;
+
+    final horaIn = docs.map((doc) => doc['hora']! as String).toList();
+
+    setState(() {
+      hora = horaIn;
+    });
+    print(horaIn);
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 30)),
+      selectableDayPredicate: (DateTime dateTime) {
+        String diaTemp = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
+        bool isAbleDate = data.contains(diaTemp);
+
+        if (isAbleDate) {
+          return true;
+        }
+        return false;
+      },
+    );
+    if (picked != null) {
+      setState(() {
+        _dataController.text = "${picked.day}/${picked.month}/${picked.year}";
+        _txtData = _dataController.text;
+      });
+    }
+    _loadHora();
+  }
+
+  void _onSaved(BuildContext context) {
+    if (_txtNome.isEmpty ||
+        _txtCpf.isEmpty ||
+        _txtTelefone.isEmpty ||
+        _txtEndereco.isEmpty ||
+        _txtBairro.isEmpty ||
+        _txtNumero.isEmpty ||
+        _txtCep.isEmpty ||
+        _txtCidade.isEmpty ||
+        _txtData.isEmpty ||
+        _txtHorario.isEmpty) {
+      // print(_txtNome);
+      // print(_txtCep);
+      // print(_txtTelefone);
+      // print(_txtBairro);
+      // print(_txtNumero);
+      // print(_txtCep);
+      // print(_txtCidade);
+      // print(_txtData);
+      // print(_txtHorario);
+      const snackBar = SnackBar(
+        content: Text('Preencha todos os campos !'),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      FirebaseFirestore.instance.collection('manutencao').add({
+        'nome': _txtNome,
+        'cpf': _txtCpf,
+        'telefone': _txtTelefone,
+        'endereço': _txtEndereco,
+        'bairro': _txtBairro,
+        'número': _txtNumero,
+        'cep': _txtCep,
+        'cidade': _txtCidade,
+        'dia': _txtData,
+        'hora': _txtHorario
+      }).then((value) async {
+        QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+            .collection('horarioManutencao')
+            .where('data', isEqualTo: _txtData)
+            .where('hora', isEqualTo: _txtHorario)
+            .get();
+
+        var idDel = querySnapshot.docs.first.id;
+
+        FirebaseFirestore.instance
+            .collection('horarioManutencao')
+            .doc(idDel)
+            .delete();
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Cadastro realizado com sucesso !'),
+        backgroundColor: Colors.green,
+        behavior: SnackBarBehavior.floating,
+      ));
+
+      Navigator.pop(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +218,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                         fontSize: 14, color: Colors.black),
                                     decoration: InputDecoration(
                                         hintText: "Nome",
-                                      prefixIcon: Icon(Icons.person),
+                                        prefixIcon: Icon(Icons.person),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -152,7 +277,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                     decoration: const InputDecoration(
                                         counterText: '',
                                         hintText: "CPF",
-                                      prefixIcon: Icon(Icons.portrait),
+                                        prefixIcon: Icon(Icons.portrait),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -218,7 +343,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                     decoration: const InputDecoration(
                                         counterText: '',
                                         hintText: "Telefone",
-                                      prefixIcon: Icon(Icons.local_phone),
+                                        prefixIcon: Icon(Icons.local_phone),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -283,7 +408,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                         fontSize: 14, color: Colors.black),
                                     decoration: InputDecoration(
                                         hintText: "Endereço",
-                                      prefixIcon: Icon(Icons.location_on),
+                                        prefixIcon: Icon(Icons.location_on),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -345,7 +470,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                         fontSize: 14, color: Colors.black),
                                     decoration: InputDecoration(
                                         hintText: "Bairro",
-                                      prefixIcon: Icon(Icons.house),
+                                        prefixIcon: Icon(Icons.house),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -409,7 +534,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                     decoration: InputDecoration(
                                         counterText: '',
                                         hintText: "Número",
-                                      prefixIcon: Icon(Icons.where_to_vote),
+                                        prefixIcon: Icon(Icons.where_to_vote),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -472,7 +597,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                     decoration: const InputDecoration(
                                         counterText: '',
                                         hintText: "CEP",
-                                      prefixIcon: Icon(Icons.share_location),
+                                        prefixIcon: Icon(Icons.share_location),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -537,7 +662,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                         fontSize: 14, color: Colors.black),
                                     decoration: InputDecoration(
                                         hintText: "Cidade",
-                                      prefixIcon: Icon(Icons.location_city),
+                                        prefixIcon: Icon(Icons.location_city),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF082b59),
@@ -586,104 +711,123 @@ class CadastraManu extends State<CadastraManutencao> {
                                 //Data
                                 Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 15, right: 15, top: 15),
-                                    child:
-                                        // StreamBuilder<
-                                        //         QuerySnapshot<
-                                        //             Map<String, dynamic>>>(
-                                        //     stream: firestore
-                                        //         .collection('horarioManutencao')
-                                        //         .orderBy('data')
-                                        //         .snapshots(),
-                                        //     builder: (context, snapshot) {
-                                        //       var docs = snapshot.data!.docs;
+                                        left: 15, right: 15, top: 20),
+                                    child: StreamBuilder<
+                                            QuerySnapshot<
+                                                Map<String, dynamic>>>(
+                                        stream: firestore
+                                            .collection('horarioManutencao')
+                                            .orderBy('dia')
+                                            .snapshots(),
+                                        builder: (context, snapshot) {
+                                          if (!snapshot.hasData) {
+                                            return const CircularProgressIndicator();
+                                          }
 
-                                        //       return
-                                        SizedBox(
-                                      height: 48,
-                                      child: DropdownButtonFormField(
-                                        decoration: const InputDecoration(
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Color(0xFFF58934),
-                                                width: 2),
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(10),
-                                            ),
-                                          ),
-                                          border: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Color(0xFFF58934),
-                                                width: 2),
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(10),
-                                            ),
-                                          ),
-                                        ),
-                                        dropdownColor: const Color(0xfffdf0e6),
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(10),
-                                        ),
-                                        items: _datas
-                                            .map((String dropDownStringItem) {
-                                          return DropdownMenuItem(
-                                              value: dropDownStringItem,
-                                              child: Text(dropDownStringItem));
-                                        }).toList(),
-                                        onChanged: (String? novaData) {
-                                          setState(() {
-                                            _txtData = novaData!;
-                                          });
-                                        },
-                                        style: const TextStyle(
-                                            fontSize: 14, color: Colors.black),
-                                      ),
-                                    )),
+                                          var docs = snapshot.data!.docs;
+
+                                          return TextField(
+                                            controller: _dataController,
+                                            cursorColor:
+                                                const Color(0xFF082b59),
+                                            cursorWidth: 1.5,
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black),
+                                            keyboardType: TextInputType.number,
+                                            decoration: const InputDecoration(
+                                                hintText: "Data",
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0xFF082b59),
+                                                    width: 2,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(10),
+                                                  ),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0xFFF58934),
+                                                    width: 2,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(10),
+                                                  ),
+                                                ),
+                                                prefixIcon:
+                                                    Icon(Icons.date_range)),
+                                            readOnly: true,
+                                            onTap: () {
+                                              _selectDate(context);
+                                            },
+                                          );
+                                        })),
 
                                 //Horário
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       left: 15, right: 15, top: 15),
-                                  child: SizedBox(
-                                    height: 48,
-                                    child: DropdownButtonFormField(
-                                      decoration: const InputDecoration(
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Color(0xFFF58934),
-                                              width: 2),
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(10),
+                                  child: StreamBuilder<
+                                          QuerySnapshot<Map<String, dynamic>>>(
+                                      stream: firestore
+                                          .collection('horarioManutencao')
+                                          .snapshots(),
+                                      builder: (context, snapshot) {
+                                        if (hora.isEmpty) {
+                                          return Text('');
+                                        }
+                                        _txtHorario = hora.first;
+                                        return SizedBox(
+                                          height: 48,
+                                          child: DropdownButtonFormField(
+                                            value: hora.first,
+                                            decoration: const InputDecoration(
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Color(0xFFF58934),
+                                                    width: 2),
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(10),
+                                                ),
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Color(0xFFF58934),
+                                                    width: 2),
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(10),
+                                                ),
+                                              ),
+                                            ),
+                                            dropdownColor:
+                                                const Color(0xfffdf0e6),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                              Radius.circular(10),
+                                            ),
+                                            items: hora.map(
+                                                (String dropDownStringItem) {
+                                              return DropdownMenuItem(
+                                                  value: dropDownStringItem,
+                                                  child:
+                                                      Text(dropDownStringItem));
+                                            }).toList(),
+                                            onChanged: (String? novoHorario) {
+                                              setState(() {
+                                                _txtHorario = novoHorario!;
+                                              });
+                                            },
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black),
                                           ),
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Color(0xFFF58934),
-                                              width: 2),
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(10),
-                                          ),
-                                        ),
-                                      ),
-                                      dropdownColor: const Color(0xfffdf0e6),
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
-                                      items: _horarios
-                                          .map((String dropDownStringItem) {
-                                        return DropdownMenuItem(
-                                            value: dropDownStringItem,
-                                            child: Text(dropDownStringItem));
-                                      }).toList(),
-                                      onChanged: (String? novoHorario) {
-                                        setState(() {
-                                          _txtHorario = novoHorario!;
-                                        });
-                                      },
-                                      style: const TextStyle(
-                                          fontSize: 14, color: Colors.black),
-                                    ),
-                                  ),
+                                        );
+                                      }),
                                 ),
 
                                 //Botão
@@ -722,48 +866,5 @@ class CadastraManu extends State<CadastraManutencao> {
                                 ),
                               ])))))
         ]));
-  }
-
-  void _onSaved(BuildContext context) {
-    if (_txtNome.isEmpty ||
-        _txtCpf.isEmpty ||
-        _txtTelefone.isEmpty ||
-        _txtEndereco.isEmpty ||
-        _txtBairro.isEmpty ||
-        _txtBairro.isEmpty ||
-        _txtNumero.isEmpty ||
-        _txtCep.isEmpty ||
-        _txtCidade.isEmpty ||
-        _txtData.isEmpty ||
-        _txtHorario.isEmpty) {
-      const snackBar = SnackBar(
-        content: Text('Preencha todos os campos !'),
-        backgroundColor: Colors.red,
-        behavior: SnackBarBehavior.floating,
-      );
-
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } else {
-      FirebaseFirestore.instance.collection('manutencao').add({
-        'nome': _txtNome,
-        'cpf': _txtCpf,
-        'telefone': _txtTelefone,
-        'endereço': _txtEndereco,
-        'bairro': _txtBairro,
-        'número': _txtNumero,
-        'cep': _txtCep,
-        'cidade': _txtCidade,
-        'dia': _txtData,
-        'hora': _txtHorario
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Cadastro realizado com sucesso !'),
-        backgroundColor: Colors.green,
-        behavior: SnackBarBehavior.floating,
-      ));
-
-      Navigator.pop(context);
-    }
   }
 }

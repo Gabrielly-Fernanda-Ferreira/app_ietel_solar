@@ -2,16 +2,87 @@ import 'package:flutter/material.dart';
 import 'styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AgendamentoManutencao extends StatefulWidget {
-  const AgendamentoManutencao({super.key});
+class AgendamentoManu extends StatefulWidget {
+  const AgendamentoManu({super.key});
 
   @override
-  State<AgendamentoManutencao> createState() => AgendamentoManu();
+  AgendamentoManutencao createState() => AgendamentoManutencao();
 }
 
-class AgendamentoManu extends State<AgendamentoManutencao> {
+class AgendamentoManutencao extends State<AgendamentoManu> {
   final TextEditingController _dataController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 30)),
+      // selectableDayPredicate:
+    );
+    if (picked != null) {
+      setState(() {
+        _dataController.text = "${picked.day}/${picked.month}/${picked.year}";
+      });
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    TimeOfDay? timed = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+        builder: ((context, child) {
+          MaterialTapTargetSize tapTargetSize = MaterialTapTargetSize.padded;
+          TextDirection textDirection = TextDirection.ltr;
+          return Theme(
+              data: Theme.of(context)
+                  .copyWith(materialTapTargetSize: tapTargetSize),
+              child: Directionality(
+                  textDirection: textDirection,
+                  child: MediaQuery(
+                      data: MediaQuery.of(context)
+                          .copyWith(alwaysUse24HourFormat: false),
+                      child: Localizations.override(
+                        context: context,
+                        locale: const Locale('pt', 'BR'),
+                        child: child!,
+                      ))));
+        }));
+
+    if (timed != null) {
+      setState(() {
+        final localizations = MaterialLocalizations.of(context);
+        final formattedTimeOfDay = localizations.formatTimeOfDay(timed);
+        _timeController.text = formattedTimeOfDay;
+      });
+    }
+  }
+
+  void _registraManutencao(BuildContext context) async {
+    DocumentReference docRef =
+        await FirebaseFirestore.instance.collection('horarioManutencao').add({
+      'data': _dataController.text,
+      'hora': _timeController.text,
+    });
+
+    String documentId = docRef.id;
+
+    await docRef.update({
+      'id': documentId,
+    });
+
+    // print(
+    //     'Document ID: $documentId');
+
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Cadastro realizado com sucesso !'),
+      backgroundColor: Colors.green,
+      behavior: SnackBarBehavior.floating,
+    ));
+
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,60 +244,5 @@ class AgendamentoManu extends State<AgendamentoManutencao> {
         ),
       ),
     );
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 30)),
-      // selectableDayPredicate: 
-    );
-    if (picked != null) {
-      setState(() {
-        _dataController.text = "${picked.day}/${picked.month}/${picked.year}";
-      });
-    }
-  }
-
-  Future<void> _selectTime(BuildContext context) async {
-    TimeOfDay? timed = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay.now(),
-        builder: ((context, child) {
-          MaterialTapTargetSize tapTargetSize = MaterialTapTargetSize.padded;
-          TextDirection textDirection = TextDirection.ltr;
-          return Theme(
-              data: Theme.of(context)
-                  .copyWith(materialTapTargetSize: tapTargetSize),
-              child: Directionality(
-                  textDirection: textDirection,
-                  child: MediaQuery(
-                      data: MediaQuery.of(context)
-                          .copyWith(alwaysUse24HourFormat: false),
-                      child: Localizations.override(
-                        context: context,
-                        locale: const Locale('pt', 'BR'),
-                        child: child!,
-                      ))));
-        }));
-
-    if (timed != null) {
-      setState(() {
-        final localizations = MaterialLocalizations.of(context);
-        final formattedTimeOfDay = localizations.formatTimeOfDay(timed);
-        _timeController.text = formattedTimeOfDay;
-      });
-    }
-  }
-
-  void _registraManutencao(BuildContext context) {
-    FirebaseFirestore.instance.collection('horarioManutencao').add({
-      'data': _dataController.text,
-      'hora': _timeController.text,
-    });
-
-    Navigator.pop(context);
   }
 }

@@ -62,7 +62,7 @@ class App extends StatelessWidget {
       routes: {
         "/login": (context) => LoginPage(),
         "/contato": (context) => const ContatoPage(),
-        "/agendamentoManutencao": (context) => const AgendamentoManutencao(),
+        "/agendamentoManutencao": (context) => AgendamentoManu(),
         "/cadastraManutencao": (context) => CadastraManutencao(),
         "/calculadora": (context) => const CalculadoraPage(),
         "/resultado": (context) => const ResultadoPage(),
@@ -74,11 +74,11 @@ class App extends StatelessWidget {
         "/funcionamento": (context) => const FuncionamentoPage(),
         "/empresa": (context) => const EmpresaPage(),
         "/listaManutencao": (context) => ListaManuntencao(),
-        "/listaOrcamento": (context) => const ListaOrcamento(),
+        "/listaOrcamento": (context) => ListaOrcamento(),
         "/cadastraOrcamento": (context) => const CadastroOrc(),
         "/listaOS": (context) => ListaOrdemDeServico(),
         "/ordemDeServico": (context) => OrdemDeServicoPage(),
-        "/agendamentoOrcamento": (context) => const AgendamentoOrcamento(),
+        "/agendamentoOrcamento": (context) => AgendamentoOrca(),
       },
       initialRoute: '/login',
     );

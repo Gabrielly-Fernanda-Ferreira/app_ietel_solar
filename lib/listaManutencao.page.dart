@@ -93,7 +93,7 @@ class ListaManuntencao extends StatelessWidget {
                                               ),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsets.all(15.0),
+                                              padding: const EdgeInsets.all(15.0),
                                               child: Column(
                                                 children: [
                                                   Row(
@@ -108,7 +108,7 @@ class ListaManuntencao extends StatelessWidget {
                                                     ],
                                                   ),
                                                   Padding(
-                                                    padding: EdgeInsets.only(
+                                                    padding: const EdgeInsets.only(
                                                         top: 10),
                                                     child: Row(
                                                       children: [
@@ -117,7 +117,7 @@ class ListaManuntencao extends StatelessWidget {
                                                           children: [
                                                             Row(
                                                               children: [
-                                                                Text(
+                                                                const Text(
                                                                   'CPF: ',
                                                                   style:
                                                                       listaCampos,
@@ -138,7 +138,7 @@ class ListaManuntencao extends StatelessWidget {
                                                             children: [
                                                               Row(
                                                                 children: [
-                                                                  Text(
+                                                                  const Text(
                                                                     "Telefone: ",
                                                                     style:
                                                                         listaCampos,
@@ -160,7 +160,7 @@ class ListaManuntencao extends StatelessWidget {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: EdgeInsets.only(
+                                                    padding: const EdgeInsets.only(
                                                         top: 15),
                                                     child: Row(
                                                       children: [
@@ -169,7 +169,7 @@ class ListaManuntencao extends StatelessWidget {
                                                             children: [
                                                               Row(
                                                                 children: [
-                                                                  Text(
+                                                                  const Text(
                                                                     "Bairro: ",
                                                                     style:
                                                                         listaCampos,
@@ -192,7 +192,7 @@ class ListaManuntencao extends StatelessWidget {
                                                             children: [
                                                               Row(
                                                                 children: [
-                                                                  Text(
+                                                                  const Text(
                                                                     "Número: ",
                                                                     style:
                                                                         listaCampos,
@@ -214,7 +214,7 @@ class ListaManuntencao extends StatelessWidget {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: EdgeInsets.only(
+                                                    padding: const EdgeInsets.only(
                                                         top: 15),
                                                     child: Row(
                                                       children: [
@@ -223,7 +223,7 @@ class ListaManuntencao extends StatelessWidget {
                                                             children: [
                                                               Row(
                                                                 children: [
-                                                                  Text(
+                                                                  const Text(
                                                                     "CEP: ",
                                                                     style:
                                                                         listaCampos,
@@ -246,7 +246,7 @@ class ListaManuntencao extends StatelessWidget {
                                                             children: [
                                                               Row(
                                                                 children: [
-                                                                  Text(
+                                                                  const Text(
                                                                     "Cidade: ",
                                                                     style:
                                                                         listaCampos,
@@ -268,7 +268,7 @@ class ListaManuntencao extends StatelessWidget {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: EdgeInsets.only(
+                                                    padding: const EdgeInsets.only(
                                                         top: 15),
                                                     child: Row(
                                                       children: [
@@ -277,7 +277,7 @@ class ListaManuntencao extends StatelessWidget {
                                                             children: [
                                                               Row(
                                                                 children: [
-                                                                  Text(
+                                                                  const Text(
                                                                     "Data: ",
                                                                     style:
                                                                         listaCampos,
@@ -300,7 +300,7 @@ class ListaManuntencao extends StatelessWidget {
                                                             children: [
                                                               Row(
                                                                 children: [
-                                                                  Text(
+                                                                  const Text(
                                                                     "Horário: ",
                                                                     style:
                                                                         listaCampos,
