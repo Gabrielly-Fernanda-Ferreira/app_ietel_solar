@@ -63,7 +63,7 @@ class EmpresaPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset("images/empresa.jpg"),
+                      Image.asset("images/empresa.jpg",width: 350),
                     ],
                   ),
                 ),
