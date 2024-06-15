@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'styles.dart';
@@ -10,8 +12,6 @@ class FuncionamentoPage extends StatefulWidget {
 }
 
 class _FuncionamentoState extends State<FuncionamentoPage> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,221 +48,195 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
                           ],
                         ),
                       ),
+
                       Padding(
-                        padding:
-                            const EdgeInsets.only(top: 30, left: 30, right: 30),
+                        padding:  EdgeInsets.only(
+                            top: 30, left: 30, right: 30, bottom: 15),
                         child: Container(
-                            decoration: BoxDecoration(
-                              color: const Color(0xfffdf0e6),
-                              border:
-                                  Border.all(color: const Color(0xFFF58934)),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(6),
+                          // margin: EdgeInsets.all(10),
+
+                          decoration: BoxDecoration(
+                            color: const Color(0xfffdf0e6),
+                            border: Border.all(color: const Color(0xFFF58934)),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(6),
+                            ),
+                          ),
+                          child: Column(children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  border: Border.all(
+                                      color: const Color(0xFFF58934))),
+                              child: const Text(
+                                overflow: TextOverflow.ellipsis,
+                                'O que é?',
+                                style: contato,
                               ),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                // Container da imagem
-                                Container(
-                                    margin: EdgeInsets.all(20),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xfffdf0e6),
-                                      border: Border.all(
-                                          color: const Color(0xFFF58934)),
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(6),
-                                      ),
+                            Container(
+                              margin: EdgeInsets.only(left: 20, right: 20),
+                              child: const Text(
+                                'A Energia Solar Fotovoltaica é obtida a partir da conversão direta da luz emitida pelo sol em eletricidade. Quando as partículas de energia provenientes do Sol (fotóns) incidem sobre os painéis, ocorre a geração de uma corrente elétrica que pode ser direcionada e utilizada tanto nas áreas urbanas, quanto nas rurais.',
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 20, bottom: 20),
+                              decoration: BoxDecoration(
+                                color: const Color(0xfffdf0e6),
+                                border:
+                                    Border.all(color: const Color(0xFFF58934)),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(6),
+                                ),
+                              ),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                       "images/fabrica_solar.gif",
+                                      width: 300,
+                                      height: 200,
+                                      fit: BoxFit.cover,
                                     ),
-                                    child: Row(
+                                  ]),
+                            ),
+                          ]),
+                        ),
+                      ),
+
+                      // SISTEMA ON-GRID E OFF-GRID
+
+                      Padding(
+                        padding:  EdgeInsets.only(
+                            top: 15, left: 30, right: 30, bottom: 15),
+                        
+                        child: Container(
+                          // margin: EdgeInsets.all(10),
+
+                          decoration: BoxDecoration(
+                            color: const Color(0xfffdf0e6),
+                            border: Border.all(color: const Color(0xFFF58934)),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(6),
+                            ),
+                          ),
+                          child: Column(children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  border: Border.all(
+                                      color: const Color(0xFFF58934))),
+                              child: const Text(
+                                overflow: TextOverflow.ellipsis,
+                                'Sistema on-grid',
+                                style: contato,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 20, right: 20),
+                              child: const Text(
+                                'Sistema ligado à rede pública de distribuição, na qual o excesso de energia vai para a distribuidora gerando créditos que podem ser usados em até 5 anos. Da mesma maneira, se a produção estiver baixa, a concessionária entra automaticamente para suprir qualquer necessidade. Esse modelo costuma ter um valor de investimento menor.',
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 20, bottom: 20),
+                              decoration: BoxDecoration(
+                                color: const Color(0xfffdf0e6),
+                                border:
+                                    Border.all(color: const Color(0xFFF58934)),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(6),
+                                ),
+                              ),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "images/on_grid.gif",
+                                      width: 300,
+                                      height: 200,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ]),
+                            ),
+                          ]),
+                        ),
+                      ),
+
+                      Padding(
+                        padding:  EdgeInsets.only(
+                            top: 15, left: 30, right: 30, bottom: 15),
+                        child: Container(
+                          // margin: EdgeInsets.all(10),
+
+                          decoration: BoxDecoration(
+                            color: const Color(0xfffdf0e6),
+                            border: Border.all(color: const Color(0xFFF58934)),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(6),
+                            ),
+                          ),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(15),
+                                  decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      border: Border.all(
+                                          color: const Color(0xFFF58934))),
+                                  child: const Text(
+                                    overflow: TextOverflow.ellipsis,
+                                    'Sistema off-grid',
+                                    style: contato,
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(left: 20, right: 20),
+                                  child: const Text(
+                                    'Sistema que utiliza baterias próprias, as quais são responsáveis por armazenar a energia excedente produzida. Possui funcionamento completamente autônomo e um controlador de carga para a proteção dos equipamentos. Assim, abastece os componentes elétricos no local. Esse modelo costuma ter um valor de investimento maior.',
+                                    textAlign: TextAlign.justify,
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 20, bottom: 20),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xfffdf0e6),
+                                    border: Border.all(
+                                        color: const Color(0xFFF58934)),
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(6),
+                                    ),
+                                  ),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Image.asset(
-                                          "images/fabrica_solar.gif",
+                                          "images/off_grid.gif",
                                           width: 300,
                                           height: 200,
                                           fit: BoxFit.cover,
                                         ),
-                                      ],
-                                    )),
-
-                                Expanded(
-                                    child: Column(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(10),
-                                      margin: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                          color: Color.fromARGB(
-                                              255, 255, 255, 255),
-                                          border: Border.all(
-                                              color: const Color(0xFFF58934))),
-                                      child: const Text(
-                                        overflow: TextOverflow.ellipsis,
-                                        'O que é?',
-                                        style: contato,
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.all(20),
-                                      child: const Text(
-                                        'A Energia Solar Fotovoltaica é obtida a partir da conversão direta da luz emitida pelo sol em eletricidade. Quando as partículas de energia provenientes do Sol (fotóns) incidem sobre os painéis, ocorre a geração de uma corrente elétrica que pode ser direcionada e utilizada tanto nas áreas urbanas, quanto nas rurais.',
-                                        textAlign: TextAlign.justify,
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                              ],
-                            )),
-                      ),
-
-                      // SISTEMA ON-GRID E OFF-GRID
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                top: 30,
-                                left: 30,
-                                right: 10,
-                              ),
-                              child: Container(
-                                // margin: EdgeInsets.all(10),
-
-                                decoration: BoxDecoration(
-                                  color: const Color(0xfffdf0e6),
-                                  border: Border.all(
-                                      color: const Color(0xFFF58934)),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(6),
-                                  ),
+                                      ]),
                                 ),
-                                child: Column(children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.all(10),
-                                    margin: EdgeInsets.all(15),
-                                    decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        border: Border.all(
-                                            color: const Color(0xFFF58934))),
-                                    child: const Text(
-                                      overflow: TextOverflow.ellipsis,
-                                      'Sistema on-grid',
-                                      style: contato,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(left: 20, right: 20),
-                                    child: const Text(
-                                      'Sistema ligado à rede pública de distribuição, na qual o excesso de energia vai para a distribuidora gerando créditos que podem ser usados em até 5 anos. Da mesma maneira, se a produção estiver baixa, a concessionária entra automaticamente para suprir qualquer necessidade. Esse modelo costuma ter um valor de investimento menor',
-                                      textAlign: TextAlign.justify,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(top: 20, bottom: 20),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xfffdf0e6),
-                                      border: Border.all(
-                                          color: const Color(0xFFF58934)),
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(6),
-                                      ),
-                                    ),
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "images/on_grid.gif",
-                                            width: 300,
-                                            height: 200,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ]),
-                                  ),
-                                ]),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 30, left: 10, right: 30),
-                              child: Container(
-                                // margin: EdgeInsets.all(10),
-
-                                decoration: BoxDecoration(
-                                  color: const Color(0xfffdf0e6),
-                                  border: Border.all(
-                                      color: const Color(0xFFF58934)),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(6),
-                                  ),
-                                ),
-                                child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Container(
-                                        padding: EdgeInsets.all(10),
-                                        margin: EdgeInsets.all(15),
-                                        decoration: BoxDecoration(
-                                            color: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            border: Border.all(
-                                                color:
-                                                    const Color(0xFFF58934))),
-                                        child: const Text(
-                                          overflow: TextOverflow.ellipsis,
-                                          'Sistema off-grid',
-                                          style: contato,
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            left: 20, right: 20),
-                                        child: const Text(
-                                          'Sistema que utiliza baterias próprias, as quais são responsáveis por armazenar a energia excedente produzida. Possui funcionamento completamente autônomo e um controlador de carga para a proteção dos equipamentos. Assim, abastece os componentes elétricos no local. Esse modelo costuma ter um valor de investimento maior.',
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            top: 20, bottom: 20),
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xfffdf0e6),
-                                          border: Border.all(
-                                              color: const Color(0xFFF58934)),
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(6),
-                                          ),
-                                        ),
-                                        child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Image.asset(
-                                                "images/off_grid.gif",
-                                                width: 300,
-                                                height: 200,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ]),
-                                      ),
-                                    ]),
-                              ),
-                            ),
-                          ),
-                        ],
+                              ]),
+                        ),
                       ),
 
                       // SISTEMA ON-GRID E OFF-GRID final
 
                       Padding(
                         padding: const EdgeInsets.only(
-                            top: 30, left: 30, right: 30, bottom: 30),
+                            top: 15, left: 30, right: 30, bottom: 15),
                         child: Container(
                             width: 750,
                             decoration: BoxDecoration(
@@ -313,7 +287,7 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
                                 ),
 
                                 Container(
-                                  margin: EdgeInsets.only(left: 20, right: 20),
+                                  margin: EdgeInsets.only(left: 20, right: 20,top: 5),
                                   width: 700,
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
@@ -326,7 +300,7 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(left: 20, right: 20),
+                                  margin: EdgeInsets.only(left: 20, right: 20,top: 5),
                                   width: 700,
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
@@ -340,7 +314,7 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
                                 ),
                                 Container(
                                   margin: const EdgeInsets.only(
-                                      left: 20, right: 20),
+                                      left: 20, right: 20,top: 5),
                                   width: 700,
                                   padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
@@ -355,7 +329,7 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
                                 ),
                                 Container(
                                   margin: const EdgeInsets.only(
-                                      left: 20, right: 20),
+                                      left: 20, right: 20,top: 5),
                                   width: 700,
                                   padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
@@ -370,7 +344,7 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
                                 ),
                                 Container(
                                   margin: const EdgeInsets.only(
-                                      left: 20, right: 20),
+                                      left: 20, right: 20,top: 5,),
                                   width: 700,
                                   padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
@@ -388,6 +362,7 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
                                   margin: const EdgeInsets.only(
                                     left: 20,
                                     right: 20,
+                                    top: 5,
                                   ),
                                   width: 700,
                                   padding: const EdgeInsets.all(10),
@@ -404,7 +379,7 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
 
                                 Container(
                                   margin: const EdgeInsets.only(
-                                      left: 20, right: 20, bottom: 20),
+                                      left: 20, right: 20, bottom: 20,top: 5),
                                   width: 700,
                                   padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
@@ -423,6 +398,7 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
 
                       Padding(
                         padding: const EdgeInsets.only(
+                          top: 15,
                           bottom: 30,
                           left: 30,
                           right: 30,
@@ -459,6 +435,7 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
                                 margin: const EdgeInsets.only(
                                     left: 20, right: 20, bottom: 20, top: 20),
                                 width: 700,
+                                height: 200,
                                 padding: const EdgeInsets.all(10),
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
@@ -467,7 +444,7 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
                                     border: Border.all(
                                         color: const Color(0xFFF58934))),
                                 child: CarouselSlider(
-                                  options: CarouselOptions(height: 300),
+                                  options: CarouselOptions(height: 500),
                                   items: [
                                     'images/img_casa.png',
                                     'images/img_conversor.png',
@@ -487,7 +464,8 @@ class _FuncionamentoState extends State<FuncionamentoPage> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Image.asset(i),
+                                            Image.asset(i,
+                                          fit: BoxFit.cover,)
                                           ],
                                         ),
                                       );
