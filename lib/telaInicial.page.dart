@@ -282,9 +282,10 @@ class _TelaInicialState extends State<TelaInicial> {
                 ),
 
                 //Vídeo
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                 Padding(
+                  padding: const EdgeInsets.all(5),
                   child: Container(
+                    padding: const EdgeInsets.all(5),
                     height: 215,
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -295,7 +296,8 @@ class _TelaInicialState extends State<TelaInicial> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset('images/placa_solar.gif', height: 195)
+                        Image.asset('images/placa_solar.gif', width: 350,
+                                          height: 200,fit: BoxFit.cover,)
                       ],
                     ),
                   ),
