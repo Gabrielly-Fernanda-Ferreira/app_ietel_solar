@@ -3,10 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ietel_solar/styles.dart';
-
-var _modelos = ['Tempo Integral', 'Estágio', 'Meio Período', 'Trainee'];
-
-var _tipos = ['Presencial', 'Online', 'Híbrido'];
+import 'package:brasil_fields/brasil_fields.dart';
+import 'package:flutter/services.dart';
 
 class EditarOrdemDeServicoPage extends StatefulWidget {
   var id, cliente, cpf, telefone, endereco, tecnico, motivo, diagnostico, solucao;
@@ -16,10 +14,11 @@ class EditarOrdemDeServicoPage extends StatefulWidget {
     required this.cpf,
     required this.telefone,
     required this.endereco,
+    required this.tecnico,
     required this.motivo,
     required this.diagnostico,
     required this.solucao,
-    super.key, required tecnico
+    super.key,
   });
 
   @override
@@ -30,7 +29,8 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
   final _formKey = GlobalKey<FormState>();
 
   void _onSaved(BuildContext context) {
-    if (widget.motivo.isEmpty || widget.diagnostico.isEmpty || widget.solucao.isEmpty) {
+    if (widget.motivo.isEmpty || widget.diagnostico.isEmpty || widget.solucao.isEmpty 
+    || widget.tecnico.isEmpty || widget.cliente.isEmpty || widget.endereco.isEmpty) {
       const snackBar = SnackBar(
         content: Text('Preencha todos os campos !'),
         backgroundColor: Colors.red,
@@ -129,7 +129,7 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                               fontSize: 14, color: Colors.black),
                           decoration: const InputDecoration(
                               hintText: "Cliente",
-                            prefixIcon: Icon(Icons.business_center),
+                            prefixIcon: Icon(Icons.person),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF082b59),
@@ -167,8 +167,8 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                                 ),
                               )),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (cargo) =>
-                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          validator: (cliente) =>
+                              cliente!.isEmpty ? 'Preencha o campo !' : null,
                           keyboardType: TextInputType.text,
                         ),
                       ),
@@ -190,7 +190,7 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                               fontSize: 14, color: Colors.black),
                           decoration: const InputDecoration(
                               hintText: "CPF",
-                            prefixIcon: Icon(Icons.business_center),
+                            prefixIcon: Icon(Icons.portrait),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF082b59),
@@ -227,9 +227,13 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                                   Radius.circular(10),
                                 ),
                               )),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                CpfInputFormatter(),
+                              ],
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (cargo) =>
-                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          validator: (cpf) =>
+                              cpf!.isEmpty ? 'Preencha o campo !' : null,
                           keyboardType: TextInputType.text,
                         ),
                       ),
@@ -251,7 +255,7 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                               fontSize: 14, color: Colors.black),
                           decoration: const InputDecoration(
                               hintText: "Telefone",
-                            prefixIcon: Icon(Icons.add_location),
+                            prefixIcon: Icon(Icons.local_phone),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF082b59),
@@ -289,8 +293,8 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                                 ),
                               )),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (local) =>
-                              local!.isEmpty ? 'Preencha o campo !' : null,
+                          validator: (telefone) =>
+                              telefone!.isEmpty ? 'Preencha o campo !' : null,
                           keyboardType: TextInputType.text,
                         ),
                       ),
@@ -312,7 +316,7 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                               fontSize: 14, color: Colors.black),
                           decoration: const InputDecoration(
                               hintText: "Endereço",
-                            prefixIcon: Icon(Icons.business_center),
+                            prefixIcon: Icon(Icons.location_city),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF082b59),
@@ -350,8 +354,8 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                                 ),
                               )),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (cargo) =>
-                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          validator: (endereco) =>
+                              endereco!.isEmpty ? 'Preencha o campo !' : null,
                           keyboardType: TextInputType.text,
                         ),
                       ),
@@ -371,7 +375,7 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                               fontSize: 14, color: Colors.black),
                           decoration: const InputDecoration(
                               hintText: "Tecnico",
-                            prefixIcon: Icon(Icons.business_center),
+                            prefixIcon: Icon(Icons.engineering),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF082b59),
@@ -409,8 +413,8 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                                 ),
                               )),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (cargo) =>
-                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          validator: (tecnico) =>
+                              tecnico!.isEmpty ? 'Preencha o campo !' : null,
                           keyboardType: TextInputType.text,
                         ),
                       ),
@@ -431,7 +435,7 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                               fontSize: 14, color: Colors.black),
                           decoration: const InputDecoration(
                               hintText: "Motivo",
-                            prefixIcon: Icon(Icons.business_center),
+                            prefixIcon: Icon(Icons.question_mark),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF082b59),
@@ -469,8 +473,8 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                                 ),
                               )),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (cargo) =>
-                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          validator: (motivo) =>
+                              motivo!.isEmpty ? 'Preencha o campo !' : null,
                           keyboardType: TextInputType.text,
                         ),
                       ),
@@ -490,7 +494,7 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                               fontSize: 14, color: Colors.black),
                           decoration: const InputDecoration(
                               hintText: "Diagnostico",
-                            prefixIcon: Icon(Icons.business_center),
+                            prefixIcon: Icon(Icons.content_paste_search),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF082b59),
@@ -528,8 +532,8 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                                 ),
                               )),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (cargo) =>
-                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          validator: (diagonistco) =>
+                              diagonistco!.isEmpty ? 'Preencha o campo !' : null,
                           keyboardType: TextInputType.text,
                         ),
                       ),
@@ -549,7 +553,7 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                               fontSize: 14, color: Colors.black),
                           decoration: const InputDecoration(
                               hintText: "Solução",
-                            prefixIcon: Icon(Icons.business_center),
+                            prefixIcon: Icon(Icons.tips_and_updates),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0xFF082b59),
@@ -587,8 +591,8 @@ class _EditarOrdemDeServicoState extends State<EditarOrdemDeServicoPage> {
                                 ),
                               )),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (cargo) =>
-                              cargo!.isEmpty ? 'Preencha o campo !' : null,
+                          validator: (solucao) =>
+                              solucao!.isEmpty ? 'Preencha o campo !' : null,
                           keyboardType: TextInputType.text,
                         ),
                       ),

@@ -150,6 +150,10 @@ class ListaOrdemDeServico extends StatelessWidget {
                                                   child: Row(
                                                     children: [
                                                       Text(
+                                                        "CPF: ",
+                                                        style: listaCampos,
+                                                        ),
+                                                      Text(
                                                         doc['cpf'],
                                                         style: lista
                                                       )
@@ -161,6 +165,10 @@ class ListaOrdemDeServico extends StatelessWidget {
                                                       bottom: 10),
                                                   child: Row(
                                                     children: [
+                                                      Text(
+                                                        "Telefone: ",
+                                                        style: listaCampos,
+                                                        ),
                                                       Text(
                                                         doc['telefone'],
                                                         style: lista
@@ -174,6 +182,10 @@ class ListaOrdemDeServico extends StatelessWidget {
                                                   child: Row(
                                                     children: [
                                                       Text(
+                                                        "Endereço: ",
+                                                        style: listaCampos,
+                                                        ),
+                                                      Text(
                                                         doc['endereco'],
                                                         style: lista
                                                       )
@@ -185,6 +197,10 @@ class ListaOrdemDeServico extends StatelessWidget {
                                                       bottom: 10),
                                                   child: Row(
                                                     children: [
+                                                      Text(
+                                                        "Tecnico: ",
+                                                        style: listaCampos,
+                                                        ),
                                                       Text(
                                                         doc['tecnico'],
                                                         style: lista
@@ -198,6 +214,10 @@ class ListaOrdemDeServico extends StatelessWidget {
                                                   child: Row(
                                                     children: [
                                                       Text(
+                                                        "Motivo: ",
+                                                        style: listaCampos,
+                                                        ),
+                                                      Text(
                                                         doc['motivo'],
                                                         style: lista
                                                       )
@@ -210,6 +230,10 @@ class ListaOrdemDeServico extends StatelessWidget {
                                                   child: Row(
                                                     children: [
                                                       Text(
+                                                        "Diagnostico: ",
+                                                        style: listaCampos,
+                                                        ),
+                                                      Text(
                                                         doc['diagnostico'],
                                                         style: lista
                                                       )
@@ -221,6 +245,10 @@ class ListaOrdemDeServico extends StatelessWidget {
                                                       bottom: 10),
                                                   child: Row(
                                                     children: [
+                                                      Text(
+                                                        "Solução: ",
+                                                        style: listaCampos,
+                                                        ),
                                                       Text(
                                                         doc['solucao'],
                                                         style: lista

@@ -386,7 +386,7 @@ class _CadastraCandidatosState extends State<OrdemDeServicoPage> {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "Tecnico",
-                          prefixIcon: Icon(Icons.email),
+                          prefixIcon: Icon(Icons.engineering),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0xFF082b59),
@@ -441,7 +441,7 @@ class _CadastraCandidatosState extends State<OrdemDeServicoPage> {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "Motivo",
-                          prefixIcon: Icon(Icons.task_sharp),
+                          prefixIcon: Icon(Icons.question_mark),
                           
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -500,7 +500,7 @@ class _CadastraCandidatosState extends State<OrdemDeServicoPage> {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "Diagnostico",
-                          prefixIcon: Icon(Icons.task_sharp),
+                          prefixIcon: Icon(Icons.content_paste_search),
                           
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -558,7 +558,7 @@ class _CadastraCandidatosState extends State<OrdemDeServicoPage> {
                         style: TextStyle(fontSize: 14, color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "Solução",
-                          prefixIcon: Icon(Icons.task_sharp),
+                          prefixIcon: Icon(Icons.tips_and_updates),
                           
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
