@@ -587,7 +587,7 @@ class CustomDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
-                            const AgendamentoOrcamento()));
+                            AgendamentoOrca()));
               },
             ),
 
@@ -600,7 +600,7 @@ class CustomDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
-                            const ListaOrcamento()));
+                            ListaOrcamento()));
               },
             ),
 
@@ -614,7 +614,7 @@ class CustomDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
-                            const AgendamentoManutencao()));
+                            AgendamentoManu()));
               },
             ),
 
