@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, unnecessary_const
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -100,6 +102,12 @@ class ContatoPage extends StatelessWidget {
                                                   -49.36682122539187,
                                                 ),
                                                 initialZoom: 17.2,
+                                               interactionOptions:
+                                                      InteractionOptions(
+                                                          flags: InteractiveFlag
+                                                                  .all &
+                                                              ~InteractiveFlag
+                                                                  .rotate)
                                               ),
                                               children: [
                                                 TileLayer(
@@ -193,12 +201,17 @@ class ContatoPage extends StatelessWidget {
                                             height: 200,
                                             child: FlutterMap(
                                               options: const MapOptions(
-                                                initialCenter: LatLng(
-                                                  -21.041696347108733,
-                                                  -49.38010003047861,
-                                                ),
-                                                initialZoom: 17.2,
-                                              ),
+                                                  initialCenter: LatLng(
+                                                    -21.041696347108733,
+                                                    -49.38010003047861,
+                                                  ),
+                                                  initialZoom: 17.2,
+                                                  interactionOptions:
+                                                      InteractionOptions(
+                                                          flags: InteractiveFlag
+                                                                  .all &
+                                                              ~InteractiveFlag
+                                                                  .rotate)),
                                               children: [
                                                 TileLayer(
                                                   urlTemplate:
@@ -296,6 +309,12 @@ class ContatoPage extends StatelessWidget {
                                                 -49.37777652539932,
                                               ),
                                               initialZoom: 17.2,
+                                              interactionOptions:
+                                                      InteractionOptions(
+                                                          flags: InteractiveFlag
+                                                                  .all &
+                                                              ~InteractiveFlag
+                                                                  .rotate)
                                             ),
                                             children: [
                                               TileLayer(
