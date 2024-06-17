@@ -784,7 +784,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                                         }
                                         _txtHorario = hora.first;
                                         return SizedBox(
-                                          height: 48,
+                                          height: 60,
                                           child: DropdownButtonFormField(
                                             value: hora.first,
                                             decoration: const InputDecoration(
