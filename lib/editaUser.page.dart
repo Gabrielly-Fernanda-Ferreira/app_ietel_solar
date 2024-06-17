@@ -206,7 +206,8 @@ class _EditaUserPageState extends State<EditaUserPage> {
                     TextSpan(
                       children: <TextSpan>[
                         TextSpan(text: 'Editar', style: titulo),
-                        TextSpan(text: ' Usuário', style: palavraChave)
+                        TextSpan(text: ' Usuário', style: palavraChave),
+                        TextSpan(text: ':', style: titulo),
                       ],
                     ),
                   ),
@@ -216,7 +217,7 @@ class _EditaUserPageState extends State<EditaUserPage> {
                     padding: EdgeInsets.only(
                       left: 15,
                       right: 15,
-                      top: 15,
+                      top: 20,
                     ),
                     child: TextFormField(
                       cursorColor: Color(0xFF082b59),
@@ -389,7 +390,11 @@ class _EditaUserPageState extends State<EditaUserPage> {
                   //Senha Nova
 
                   Padding(
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.only(
+                      left: 15,
+                      right: 15,
+                      top: 15,
+                    ),
                     child: TextFormField(
                       cursorColor: Color(0xFF082b59),
                       cursorWidth: 1.5,

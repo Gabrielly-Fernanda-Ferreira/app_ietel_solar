@@ -60,28 +60,38 @@ class AgendamentoOrcamento extends State<AgendamentoOrca> {
   }
 
   void _registraManutencao(BuildContext context) async {
-    DocumentReference docRef =
-        await FirebaseFirestore.instance.collection('horarioOrcamento').add({
-      'data': _dataController.text,
-      'hora': _timeController.text,
-    });
+    if (_dataController.text == '' || _timeController.text == '') {
+      const snackBar = SnackBar(
+        content: Text('Preencha todos os campos !'),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+      );
 
-    String documentId = docRef.id;
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      DocumentReference docRef =
+          await FirebaseFirestore.instance.collection('horarioOrcamento').add({
+        'data': _dataController.text,
+        'hora': _timeController.text,
+      });
 
-    await docRef.update({
-      'id': documentId,
-    });
+      String documentId = docRef.id;
 
-    // print(
-    //     'Document ID: $documentId');
+      await docRef.update({
+        'id': documentId,
+      });
 
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Cadastro realizado com sucesso !'),
-      backgroundColor: Colors.green,
-      behavior: SnackBarBehavior.floating,
-    ));
+      // print(
+      //     'Document ID: $documentId');
 
-    Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Cadastro realizado com sucesso !'),
+        backgroundColor: Colors.green,
+        behavior: SnackBarBehavior.floating,
+      ));
+
+      Navigator.pop(context);
+    }
   }
 
   @override

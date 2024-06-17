@@ -148,7 +148,24 @@ class _LoginPageState extends State<LoginPage> {
                             Radius.circular(10),
                           ),
                         ),
-                      ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        )),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (email) =>
                           email!.isEmpty ? 'Preencha o campo !' : null,
@@ -190,7 +207,24 @@ class _LoginPageState extends State<LoginPage> {
                             Radius.circular(10),
                           ),
                         ),
-                      ),
+                          errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        )),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (password) =>
                           password!.isEmpty ? 'Preencha o campo !' : null,

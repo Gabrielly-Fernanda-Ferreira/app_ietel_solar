@@ -1,6 +1,5 @@
 // ignore_for_file: sort_child_properties_last, curly_braces_in_flow_control_structures, prefer_const_constructors, must_be_immutable, non_constant_identifier_names, prefer_typing_uninitialized_variables
 
-import 'dart:io';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -97,6 +96,7 @@ class _CadastraCandidatosState extends State<OrdemDeServicoPage> {
           Padding(
             padding: const EdgeInsets.all(10),
             child: Container(
+              height: MediaQuery.of(context).size.height,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(
@@ -424,6 +424,10 @@ class _CadastraCandidatosState extends State<OrdemDeServicoPage> {
                             ),
                           ),
                         ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (tecnico) =>
+                            tecnico!.isEmpty ? 'Preencha o campo !' : null,
+                        keyboardType: TextInputType.text,
                       ),
                     ),
 
@@ -606,7 +610,7 @@ class _CadastraCandidatosState extends State<OrdemDeServicoPage> {
                     //Botão
                     Padding(
                       padding: const EdgeInsets.only(
-                          left: 15, right: 15, top: 30, bottom: 32),
+                          left: 15, right: 15, top: 30),
                       child: SizedBox(
                         width: 200,
                         height: 36,

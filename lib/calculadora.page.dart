@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ietel_solar/resultado.page.dart';
 import 'styles.dart';
 
@@ -76,6 +78,7 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Container(
+            height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(
@@ -108,7 +111,7 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
                 // CEP
                 Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15, top: 30),
-                  child: TextField(
+                  child: TextFormField(
                     controller: _cepController,
                     cursorColor: const Color(0xFF082b59),
                     cursorWidth: 1.5,
@@ -134,37 +137,89 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
                           Radius.circular(10),
                         ),
                       ),
-                    ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      )),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      CepInputFormatter(),
+                    ],
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (cargo) =>
+                          cargo!.isEmpty ? 'Preencha o campo !' : null,
                     keyboardType: TextInputType.text,
                   ),
                 ),
 
-                // Concessionaria
+
+                //Tipo
                 Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: DropdownButton<String>(
-                    value: _concessionariaSelecionada,
-                    hint: const Text("Selecione a Concessionária"),
-                    items: _concessionarias.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value, style: font),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _concessionariaSelecionada = newValue;
-                      });
-                    },
+                  padding:
+                      const EdgeInsets.only(left: 15, right: 15, top: 15),
+                  child: SizedBox(
+                    height: 48,
+                    child: DropdownButtonFormField(
+                      value: _concessionariaSelecionada,
+                      hint: const Text("Selecione a Concessionária"),
+                      decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color(0xFFF58934), width: 2),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color(0xFFF58934), width: 2),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                      ),
+                      dropdownColor: const Color(0xfffdf0e6),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      items: _concessionarias.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value, style: font),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _concessionariaSelecionada = newValue;
+                        });
+                      },
+                      style: const TextStyle(
+                          fontSize: 14, color: Colors.black),
+                    ),
                   ),
                 ),
+
 
                 // Conta de Luz
                 Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 15),
-                    child: TextField(
+                    child: TextFormField(
                       controller: _valorEnergiaController,
                       cursorColor: const Color(0xFF082b59),
                       cursorWidth: 1.5,
@@ -190,8 +245,28 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
                             Radius.circular(10),
                           ),
                         ),
+                        errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
-                      keyboardType: TextInputType.number,
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      )),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (cargo) =>
+                          cargo!.isEmpty ? 'Preencha o campo !' : null,
+                    keyboardType: TextInputType.number,
                     ),
                   ),
                 ),

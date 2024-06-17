@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ietel_solar/alteraVagas.page.dart';
 import 'package:ietel_solar/os/editarOrdemDeServico.dart';
 import 'package:ietel_solar/os/ordemDeServico.page.dart';
 import 'package:ietel_solar/styles.dart';
@@ -262,7 +261,7 @@ class ListaOrdemDeServico extends StatelessWidget {
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsets.only(
-                                                      top: 10, left: 20),
+                                                    left: 20),
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment

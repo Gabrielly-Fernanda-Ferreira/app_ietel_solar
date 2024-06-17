@@ -143,150 +143,26 @@ class _TelaInicialState extends State<TelaInicial> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: CustomDrawer(user: widget.user, cargo: cargo, nome: nome),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFF082b59),
-              borderRadius: BorderRadius.all(
-                Radius.circular(6),
-              ),
-            ),
-
-            //Previsão do Tempo
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 60,
-                  alignment: Alignment.center,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(6),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: IconButton(
-                              icon: Icon(Icons.location_on,
-                                  color: Color(0xFFF58934)),
-                              iconSize: 20,
-                              onPressed: () => _pegarClima(),
-                            ),
-                          )
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            cidade,
-                            style: clima,
-                          )
-                        ],
-                      ),
-                      const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.wb_sunny,
-                            color: Color(0xFFF58934),
-                            size: 20,
-                          )
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (nascer_sol == null || por_sol == null) ...[
-                            Text(
-                              '',
-                              style: clima,
-                            )
-                          ] else ...[
-                            Text(
-                              '${nascer_sol}h - ${por_sol}h',
-                              style: clima,
-                            )
-                          ]
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.thermostat,
-                            color: Color(0xFFF58934),
-                            size: 20,
-                          )
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (temperatura == null) ...[
-                            Text(
-                              '',
-                              style: clima,
-                            )
-                          ] else ...[
-                            Text(
-                              '${temperatura.round()}°C',
-                              style: clima,
-                            )
-                          ]
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.water_drop,
-                            color: Color(0xFFF58934),
-                            size: 20,
-                          )
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (umidade == null) ...[
-                            Padding(
-                              padding: EdgeInsets.only(right: 15),
-                              child: Text(
-                                '',
-                                style: clima,
-                              ),
-                            ),
-                          ] else ...[
-                            Padding(
-                              padding: EdgeInsets.only(right: 15),
-                              child: Text(
-                                '${umidade}%',
-                                style: clima,
-                              ),
-                            ),
-                          ]
-                        ],
-                      )
-                    ],
-                  ),
+      body: ListView(
+        children: [
+          Center(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Color(0xFF082b59),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(6),
                 ),
-
-                //Vídeo
-                 Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Container(
-                    padding: const EdgeInsets.all(5),
-                    height: 215,
+              ),
+        
+              //Previsão do Tempo
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 60,
+                    alignment: Alignment.center,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
@@ -294,99 +170,225 @@ class _TelaInicialState extends State<TelaInicial> {
                       ),
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('images/placa_solar.gif', width: 350,
-                                          height: 200,fit: BoxFit.cover,)
-                      ],
-                    ),
-                  ),
-                ),
-
-                //Cards
-                Container(
-                  color: const Color(0xFF082b59),
-                  height: 290,
-                  width: 300,
-                  alignment: Alignment.center,
-                  child: const Padding(
-                    padding: EdgeInsets.only(
-                      top: 10,
-                    ),
-                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image(
-                                image: ResizeImage(
-                                    AssetImage('images/imagem_card_1.png'),
-                                    width: 120,
-                                    height: 90)),
                             Padding(
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: Text(
-                                "+",
-                                style: card,
+                              padding: EdgeInsets.only(left: 10),
+                              child: IconButton(
+                                icon: Icon(Icons.location_on,
+                                    color: Color(0xFFF58934)),
+                                iconSize: 20,
+                                onPressed: () => _pegarClima(),
                               ),
-                            ),
-                            Text(
-                              "ECONÔMICA",
-                              style: card,
-                            ),
+                            )
                           ],
                         ),
-                        Row(
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image(
-                                image: ResizeImage(
-                                    AssetImage('images/imagem_card_2.png'),
-                                    width: 120,
-                                    height: 90)),
-                            Padding(
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: Text(
-                                "+",
-                                style: card,
-                              ),
-                            ),
                             Text(
-                              "SEGURA",
-                              style: card,
-                            ),
+                              cidade,
+                              style: clima,
+                            )
                           ],
                         ),
-                        Row(
+                        const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image(
-                                image: ResizeImage(
-                                    AssetImage('images/imagem_card_3.png'),
-                                    width: 120,
-                                    height: 90)),
-                            Padding(
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: Text(
-                                "+",
-                                style: card,
+                            Icon(
+                              Icons.wb_sunny,
+                              color: Color(0xFFF58934),
+                              size: 20,
+                            )
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (nascer_sol == null || por_sol == null) ...[
+                              Text(
+                                '',
+                                style: clima,
+                              )
+                            ] else ...[
+                              Text(
+                                '${nascer_sol}h - ${por_sol}h',
+                                style: clima,
+                              )
+                            ]
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.thermostat,
+                              color: Color(0xFFF58934),
+                              size: 20,
+                            )
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (temperatura == null) ...[
+                              Text(
+                                '',
+                                style: clima,
+                              )
+                            ] else ...[
+                              Text(
+                                '${temperatura.round()}°C',
+                                style: clima,
+                              )
+                            ]
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.water_drop,
+                              color: Color(0xFFF58934),
+                              size: 20,
+                            )
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (umidade == null) ...[
+                              Padding(
+                                padding: EdgeInsets.only(right: 15),
+                                child: Text(
+                                  '',
+                                  style: clima,
+                                ),
                               ),
-                            ),
-                            Text(
-                              "SUSTENTÁVEL",
-                              style: card,
-                            ),
+                            ] else ...[
+                              Padding(
+                                padding: EdgeInsets.only(right: 15),
+                                child: Text(
+                                  '${umidade}%',
+                                  style: clima,
+                                ),
+                              ),
+                            ]
                           ],
                         )
                       ],
                     ),
                   ),
-                ),
-              ],
+        
+                  //Vídeo
+                   Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      height: 215,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(6),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('images/placa_solar.gif', width: 350,
+                                            height: 200,fit: BoxFit.cover,)
+                        ],
+                      ),
+                    ),
+                  ),
+        
+                  //Cards
+                  Container(
+                    color: const Color(0xFF082b59),
+                    height: 290,
+                    width: 300,
+                    alignment: Alignment.center,
+                    child: const Padding(
+                      padding: EdgeInsets.only(
+                        top: 10,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image(
+                                  image: ResizeImage(
+                                      AssetImage('images/imagem_card_1.png'),
+                                      width: 120,
+                                      height: 90)),
+                              Padding(
+                                padding: EdgeInsets.only(left: 20, right: 20),
+                                child: Text(
+                                  "+",
+                                  style: card,
+                                ),
+                              ),
+                              Text(
+                                "ECONÔMICA",
+                                style: card,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Image(
+                                  image: ResizeImage(
+                                      AssetImage('images/imagem_card_2.png'),
+                                      width: 120,
+                                      height: 90)),
+                              Padding(
+                                padding: EdgeInsets.only(left: 20, right: 20),
+                                child: Text(
+                                  "+",
+                                  style: card,
+                                ),
+                              ),
+                              Text(
+                                "SEGURA",
+                                style: card,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Image(
+                                  image: ResizeImage(
+                                      AssetImage('images/imagem_card_3.png'),
+                                      width: 120,
+                                      height: 90)),
+                              Padding(
+                                padding: EdgeInsets.only(left: 20, right: 20),
+                                child: Text(
+                                  "+",
+                                  style: card,
+                                ),
+                              ),
+                              Text(
+                                "SUSTENTÁVEL",
+                                style: card,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
+          )
+        ],
       ),
-
-      //Título
     );
   }
 }

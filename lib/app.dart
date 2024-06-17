@@ -1,9 +1,10 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:ietel_solar/os/ordemDeServico.page.dart';
 
 import 'login.page.dart';
 import 'cadastraUser.page.dart';
-import 'editaUser.page.dart';
 
 import 'contato.page.dart';
 import 'funcionamento.page.dart';
@@ -12,7 +13,6 @@ import 'empresa.page.dart';
 import 'agendamentoManutencao.dart';
 import 'cadastraManutencao.page.dart';
 
-import 'resultado.page.dart';
 import 'calculadora.page.dart';
 
 import 'cadastraVagas.page.dart';
@@ -62,15 +62,13 @@ class App extends StatelessWidget {
       routes: {
         "/login": (context) => LoginPage(),
         "/contato": (context) => const ContatoPage(),
-        "/agendamentoManutencao": (context) => AgendamentoManu(),
+        "/agendamentoManutencao": (context) => const AgendamentoManu(),
         "/cadastraManutencao": (context) => CadastraManutencao(),
         "/calculadora": (context) => const CalculadoraPage(),
-        "/resultado": (context) => const ResultadoPage(),
         "/cadastraVagas": (context) => const CadastraVagasPage(),
         "/listaVagasAdm": (context) => ListaVagasAdmPage(),
         "/listaVagas": (context) => ListaVagasPage(),
         "/cadastraUser": (context) => const CadastraUserPage(),
-        "/editaUser": (context) => const EditaUserPage(),
         "/funcionamento": (context) => const FuncionamentoPage(),
         "/empresa": (context) => const EmpresaPage(),
         "/listaManutencao": (context) => ListaManuntencao(),
