@@ -65,7 +65,7 @@ class ListaManuntencao extends StatelessWidget {
                         var docs = snapshot.data!.docs;
 
                         return SizedBox(
-                          height: 500,
+                          height: 600,
                           child: ListView(children: [
                             Center(
                               child: Column(

@@ -173,7 +173,7 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
                   padding:
                       const EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: SizedBox(
-                    height: 48,
+                    height: 60,
                     child: DropdownButtonFormField(
                       value: _concessionariaSelecionada,
                       hint: const Text("Selecione a Concessionária"),

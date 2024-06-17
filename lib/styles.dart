@@ -26,10 +26,10 @@ const menuEmail =
     TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400);
 
 const card =
-    TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w200);
+    TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w800);
 
 const clima =
-    TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.w200);
+    TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.w300);
 
 const listaTitulo =
     TextStyle(color: Color(0xFF082b59), fontSize: 16, fontWeight: FontWeight.w600);

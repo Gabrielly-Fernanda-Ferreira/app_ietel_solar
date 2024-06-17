@@ -173,7 +173,7 @@ class _AlteraVagasState extends State<AlteraVagasPage> {
                         padding:
                             const EdgeInsets.only(left: 15, right: 15, top: 15),
                         child: SizedBox(
-                          height: 48,
+                          height: 60,
                           child: DropdownButtonFormField(
                             decoration: const InputDecoration(
                               enabledBorder: OutlineInputBorder(
@@ -278,7 +278,7 @@ class _AlteraVagasState extends State<AlteraVagasPage> {
                         padding:
                             const EdgeInsets.only(left: 15, right: 15, top: 15),
                         child: SizedBox(
-                          height: 48,
+                          height: 60,
                           child: DropdownButtonFormField(
                             decoration: const InputDecoration(
                               enabledBorder: OutlineInputBorder(

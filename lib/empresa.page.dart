@@ -22,6 +22,7 @@ class EmpresaPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Container(
+               height: MediaQuery.of(context).size.height,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(

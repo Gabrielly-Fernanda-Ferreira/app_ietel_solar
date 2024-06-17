@@ -117,310 +117,316 @@ class _CadastraUserState extends State<CadastraUserPage> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       backgroundColor: const Color(0xFF082b59),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(6),
+      body: ListView(
+        children: [
+          Center(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(6),
+                ),
               ),
-            ),
-            child: Form(
-              key: _formkey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text.rich(
-                    TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(text: 'Cadastrar um novo', style: titulo),
-                        TextSpan(text: ' Usuário', style: palavraChave),
-                        TextSpan(text: ':', style: titulo),
-                      ],
-                    ),
-                  ),
-
-                  //Nome
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 15,
-                      right: 15,
-                      top: 20,
-                    ),
-                    child: TextFormField(
-                      cursorColor: const Color(0xFF082b59),
-                      cursorWidth: 1.5,
-                      style: const TextStyle(fontSize: 14, color: Colors.black),
-                      controller: _nomeController,
-                      decoration: const InputDecoration(
-                          hintText: "Digite seu Nome",
-                          prefixIcon: Icon(Icons.person),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFF082b59),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFF58934),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          )),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (nome) =>
-                          nome!.isEmpty ? 'Preencha o campo !' : null,
-                      keyboardType: TextInputType.text,
-                    ),
-                  ),
-
-                  //Email
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 15,
-                      right: 15,
-                      top: 30,
-                      bottom: 15,
-                    ),
-                    child: TextFormField(
-                      cursorColor: const Color(0xFF082b59),
-                      cursorWidth: 1.5,
-                      style: const TextStyle(fontSize: 14, color: Colors.black),
-                      controller: _emailController,
-                      decoration: const InputDecoration(
-                          hintText: "Digite o email",
-                          prefixIcon: Icon(Icons.email),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFF082b59),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFF58934),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          )),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (email) =>
-                          email!.isEmpty ? 'Preencha o campo !' : null,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                  ),
-
-                  //Senha
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 15,
-                      right: 15,
-                      top: 15,
-                      bottom: 15,
-                    ),
-                    child: TextFormField(
-                      cursorColor: const Color(0xFF082b59),
-                      cursorWidth: 1.5,
-                      style: const TextStyle(fontSize: 14, color: Colors.black),
-                      controller: _passwordController,
-                      decoration: InputDecoration(
-                          hintText: "Digite sua senha",
-                          prefixIcon: Icon(Icons.lock),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFF082b59),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFF58934),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          )),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (password) =>
-                          password!.isEmpty ? 'Preencha o campo !' : null,
-                      keyboardType: TextInputType.text,
-                      obscureText: true,
-                    ),
-                  ),
-
-                  //DIGITE SUA SENHA NOVAMENTE
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 15,
-                      right: 15,
-                      top: 15,
-                    ),
-                    child: TextFormField(
-                      cursorColor: Color(0xFF082b59),
-                      cursorWidth: 1.5,
-                      style: TextStyle(fontSize: 14, color: Colors.black),
-                      decoration: InputDecoration(
-                          hintText: "Digite sua senha novamente",
-                          prefixIcon: Icon(Icons.lock),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFF082b59),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFF58934),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          )),
-                      keyboardType: TextInputType.text,
-                      obscureText: true,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (senha) {
-                        if (senha!.isEmpty) {
-                          return 'Preencha o campo!';
-                        }
-                        if (senha != _passwordController.text) {
-                          return 'As senhas não coincidem!';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-
-                  //Botão
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 15, right: 15, top: 30, bottom: 32),
-                    child: SizedBox(
-                      width: 200,
-                      height: 36,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          overlayColor:
-                              MaterialStateProperty.resolveWith<Color?>(
-                            (Set<MaterialState> states) {
-                              if (states.contains(MaterialState.hovered))
-                                return Color(0xFF082b59);
-                              return null;
-                            },
-                          ),
+              child: Form(
+                key: _formkey,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: Column(
+                    children: <Widget>[
+                      const Text.rich(
+                        TextSpan(
+                          children: <TextSpan>[
+                            TextSpan(text: 'Cadastrar um novo', style: titulo),
+                            TextSpan(text: ' Usuário', style: palavraChave),
+                            TextSpan(text: ':', style: titulo),
+                          ],
                         ),
-                        child: const Text(
-                          "CADASTRAR",
-                          style: button,
-                        ),
-                        onPressed: () => _cadastrarUsuario(),
                       ),
-                    ),
+                          
+                      //Nome
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 15,
+                          right: 15,
+                          top: 20,
+                        ),
+                        child: TextFormField(
+                          cursorColor: const Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: const TextStyle(fontSize: 14, color: Colors.black),
+                          controller: _nomeController,
+                          decoration: const InputDecoration(
+                              hintText: "Digite seu Nome",
+                              prefixIcon: Icon(Icons.person),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (nome) =>
+                              nome!.isEmpty ? 'Preencha o campo !' : null,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                          
+                      //Email
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 15,
+                          right: 15,
+                          top: 30,
+                          bottom: 15,
+                        ),
+                        child: TextFormField(
+                          cursorColor: const Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: const TextStyle(fontSize: 14, color: Colors.black),
+                          controller: _emailController,
+                          decoration: const InputDecoration(
+                              hintText: "Digite o email",
+                              prefixIcon: Icon(Icons.email),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (email) =>
+                              email!.isEmpty ? 'Preencha o campo !' : null,
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                      ),
+                          
+                      //Senha
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 15,
+                          right: 15,
+                          top: 15,
+                          bottom: 15,
+                        ),
+                        child: TextFormField(
+                          cursorColor: const Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: const TextStyle(fontSize: 14, color: Colors.black),
+                          controller: _passwordController,
+                          decoration: InputDecoration(
+                              hintText: "Digite sua senha",
+                              prefixIcon: Icon(Icons.lock),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (password) =>
+                              password!.isEmpty ? 'Preencha o campo !' : null,
+                          keyboardType: TextInputType.text,
+                          obscureText: true,
+                        ),
+                      ),
+                          
+                      //DIGITE SUA SENHA NOVAMENTE
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 15,
+                          right: 15,
+                          top: 15,
+                        ),
+                        child: TextFormField(
+                          cursorColor: Color(0xFF082b59),
+                          cursorWidth: 1.5,
+                          style: TextStyle(fontSize: 14, color: Colors.black),
+                          decoration: InputDecoration(
+                              hintText: "Digite sua senha novamente",
+                              prefixIcon: Icon(Icons.lock),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFF082b59),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFF58934),
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              )),
+                          keyboardType: TextInputType.text,
+                          obscureText: true,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (senha) {
+                            if (senha!.isEmpty) {
+                              return 'Preencha o campo!';
+                            }
+                            if (senha != _passwordController.text) {
+                              return 'As senhas não coincidem!';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                          
+                      //Botão
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15, right: 15, top: 30, bottom: 32),
+                        child: SizedBox(
+                          width: 200,
+                          height: 36,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.hovered))
+                                    return Color(0xFF082b59);
+                                  return null;
+                                },
+                              ),
+                            ),
+                            child: const Text(
+                              "CADASTRAR",
+                              style: button,
+                            ),
+                            onPressed: () => _cadastrarUsuario(),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
         ),
-      ),
+      ]),
     );
   }
 }

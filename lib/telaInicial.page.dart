@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -147,7 +149,11 @@ class _TelaInicialState extends State<TelaInicial> {
         children: [
           Center(
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(
+              top:30,
+              right: 15,
+              left: 15
+            ),
             child: Container(
               decoration: const BoxDecoration(
                 color: Color(0xFF082b59),
@@ -175,15 +181,12 @@ class _TelaInicialState extends State<TelaInicial> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 10),
-                              child: IconButton(
+                            IconButton(
                                 icon: Icon(Icons.location_on,
                                     color: Color(0xFFF58934)),
                                 iconSize: 20,
                                 onPressed: () => _pegarClima(),
                               ),
-                            )
                           ],
                         ),
                         Column(
@@ -285,7 +288,12 @@ class _TelaInicialState extends State<TelaInicial> {
         
                   //Vídeo
                    Padding(
-                    padding: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.only(
+                      top: 30,
+                      right: 5,
+                      left: 5,
+                      bottom: 20
+                    ),
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       height: 215,

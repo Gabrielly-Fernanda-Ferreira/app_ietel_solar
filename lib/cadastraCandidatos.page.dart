@@ -41,7 +41,6 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
     if (_txtNome.isEmpty ||
         _txtCPF.isEmpty ||
         _txtTelefone.isEmpty ||
-        _txtTelefone.isEmpty ||
         _txtCidade.isEmpty ||
         _txtEmail.isEmpty ||
         !_txtEmail.contains("@") ||
@@ -529,7 +528,6 @@ class _CadastraCandidatosState extends State<CadastraCandidatosPage> {
                     Padding(
                       padding: EdgeInsets.only(left: 15, right: 15, top: 15),
                       child: TextFormField(
-                        initialValue: nomeArquivo,
                         showCursor: false,
                         onTap: () => selecionarCurriculo(),
                         cursorColor: Color(0xFF082b59),

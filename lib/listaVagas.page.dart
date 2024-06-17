@@ -72,7 +72,7 @@ class ListaVagasPage extends StatelessWidget {
                         var docs = snapshot.data!.docs;
 
                         return SizedBox(
-                          height: 500,
+                          height: 600,
                           child: ListView(children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -162,7 +162,7 @@ class ListaVagasPage extends StatelessWidget {
                                                   child: Row(
                                                     children: [
                                                       SizedBox(
-                                                        width: 375,
+                                                        width: 300,
                                                         child: Text(
                                                           doc['descricao'],
                                                           style: lista,

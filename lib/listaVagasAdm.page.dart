@@ -104,7 +104,7 @@ class ListaVagasAdmPage extends StatelessWidget {
                         var docs = snapshot.data!.docs;
 
                         return SizedBox(
-                          height: 500,
+                          height: 600,
                           child: ListView(children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -194,7 +194,7 @@ class ListaVagasAdmPage extends StatelessWidget {
                                                   child: Row(
                                                     children: [
                                                       SizedBox(
-                                                        width: 375,
+                                                        width: 300,
                                                         child: Text(
                                                           doc['descricao'],
                                                           style: lista,
@@ -238,7 +238,7 @@ class ListaVagasAdmPage extends StatelessWidget {
                                                       Icon(
                                                         Icons.delete,
                                                         color:
-                                                            Color(0xFF082b59),
+                                                            Colors.red,
                                                       ),
                                                     ],
                                                   ),
