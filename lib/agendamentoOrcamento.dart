@@ -207,6 +207,7 @@ class AgendamentoOrcamento extends State<AgendamentoOrca> {
                           Radius.circular(10),
                         ),
                       ),
+                      prefixIcon: Icon(Icons.access_time_outlined)
                     ),
                     readOnly: true,
                     onTap: () {

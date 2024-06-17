@@ -62,7 +62,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
     setState(() {
       hora = horaIn;
     });
-    print(horaIn);
+    // print(horaIn);
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -801,6 +801,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                                                   Radius.circular(10),
                                                 ),
                                               ),
+                                              prefixIcon: Icon(Icons.access_time_outlined)
                                             ),
                                             dropdownColor:
                                                 const Color(0xfffdf0e6),

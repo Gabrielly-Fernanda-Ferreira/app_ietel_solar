@@ -64,7 +64,7 @@ class CadastraManu extends State<CadastraManutencao> {
     setState(() {
       hora = horaIn;
     });
-    print(horaIn);
+    // print(horaIn);
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -803,6 +803,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                                   Radius.circular(10),
                                                 ),
                                               ),
+                                              prefixIcon: Icon(Icons.access_time_outlined)
                                             ),
                                             dropdownColor:
                                                 const Color(0xfffdf0e6),
