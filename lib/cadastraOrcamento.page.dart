@@ -321,6 +321,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                                     validator: (cpf) => cpf!.isEmpty
                                         ? 'Preencha o campo !'
                                         : null,
+                                    keyboardType: TextInputType.number,
                                   ),
                                 ),
 
@@ -387,6 +388,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                                     validator: (telefone) => telefone!.isEmpty
                                         ? 'Preencha o campo !'
                                         : null,
+                                    keyboardType: TextInputType.number,
                                   ),
                                 ),
 
@@ -574,7 +576,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                                     validator: (numero) => numero!.isEmpty
                                         ? 'Preencha o campo !'
                                         : null,
-                                    keyboardType: TextInputType.text,
+                                    keyboardType: TextInputType.number,
                                   ),
                                 ),
 
@@ -641,6 +643,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                                     validator: (cep) => cep!.isEmpty
                                         ? 'Preencha o campo !'
                                         : null,
+                                    keyboardType: TextInputType.number,
                                   ),
                                 ),
 
