@@ -323,6 +323,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                     validator: (cpf) => cpf!.isEmpty
                                         ? 'Preencha o campo !'
                                         : null,
+                                    keyboardType: TextInputType.number,
                                   ),
                                 ),
 
@@ -389,6 +390,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                     validator: (telefone) => telefone!.isEmpty
                                         ? 'Preencha o campo !'
                                         : null,
+                                    keyboardType: TextInputType.number,
                                   ),
                                 ),
 
@@ -576,7 +578,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                     validator: (numero) => numero!.isEmpty
                                         ? 'Preencha o campo !'
                                         : null,
-                                    keyboardType: TextInputType.text,
+                                    keyboardType: TextInputType.number,
                                   ),
                                 ),
 
@@ -643,6 +645,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                     validator: (cep) => cep!.isEmpty
                                         ? 'Preencha o campo !'
                                         : null,
+                                    keyboardType: TextInputType.number,
                                   ),
                                 ),
 
@@ -783,7 +786,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                         }
                                         _txtHorario = hora.first;
                                         return SizedBox(
-                                          height: 48,
+                                          height: 60,
                                           child: DropdownButtonFormField(
                                             value: hora.first,
                                             decoration: const InputDecoration(
