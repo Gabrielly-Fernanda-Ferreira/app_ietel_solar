@@ -722,7 +722,7 @@ class CadastroOrcamento extends State<CadastroOrc> {
                                             return const CircularProgressIndicator();
                                           }
 
-                                          var docs = snapshot.data!.docs;
+                                          snapshot.data!.docs;
 
                                           return TextField(
                                             controller: _dataController,

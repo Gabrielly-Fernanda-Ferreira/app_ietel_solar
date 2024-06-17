@@ -724,7 +724,7 @@ class CadastraManu extends State<CadastraManutencao> {
                                             return const CircularProgressIndicator();
                                           }
 
-                                          var docs = snapshot.data!.docs;
+                                          snapshot.data!.docs;
 
                                           return TextField(
                                             controller: _dataController,
