@@ -36,22 +36,23 @@ class _CalculadoraPageState extends State<CalculadoraPage> {
 
   Map<String, dynamic> simuladorSolar(double valorEnergia, double taxaConcessionaria) {
     var producaoDoAparalho = 57.50;
-    var kwpDoAparelho = 0.46;
+    var kwpDoAparelho = 0.56;
     var areaDoAparelho = 2.157;
-    var eficienciaDoAparelho = 0.21;
-    var diasDoAno = 8760;
-    var imprevistos = 0.65;
-    var precoDoAparalho = 1200;
-    var maoDeObra = 2750;
-    var kwhMes = valorEnergia / (taxaConcessionaria / 100);
+    var eficienciaDoAparelho = 0.55;
+    var diasDoAno = 365;
+    var imprevistos = 0.55;
+    var precoDoAparalho = 1000;
+    var maoDeObra = 1200;
+    var kwhMes = valorEnergia / taxaConcessionaria;
     var quantidadeDePlacasInstaladas = (kwhMes / producaoDoAparalho).ceil();
     var producaoMensal = quantidadeDePlacasInstaladas * producaoDoAparalho;
     var potenciaInstalada = quantidadeDePlacasInstaladas * kwpDoAparelho;
     var areaMinima = areaDoAparelho * quantidadeDePlacasInstaladas;
     var producaoAnual = potenciaInstalada * eficienciaDoAparelho * diasDoAno * imprevistos;
-    var economiaAnual = producaoAnual * (taxaConcessionaria / 100);
+    var economiaAnual = producaoAnual * taxaConcessionaria;
     var investimentoInicial = (quantidadeDePlacasInstaladas * precoDoAparalho) + maoDeObra;
-    var tempoDePayback = investimentoInicial / economiaAnual;
+    var tempoDePayback = investimentoInicial / (economiaAnual * 10);
+
 
     return {
       'areaMinima': areaMinima,
