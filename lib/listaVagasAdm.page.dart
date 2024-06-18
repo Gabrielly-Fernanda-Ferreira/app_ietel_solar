@@ -41,6 +41,14 @@ class ListaVagasAdmPage extends StatelessWidget {
             builder: (BuildContext context) => ListaCandidatosPage(id_vaga: idVaga)));
   }
 
+  Future<void> _deleteVaga(String id) async {
+    try {
+      await firestore.collection('vagas').doc(id).delete();
+    } catch (e) {
+      print('Error deleting document: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -235,10 +243,34 @@ class ListaVagasAdmPage extends StatelessWidget {
                                                                 ),
                                                         ),
                                                       ),
-                                                      Icon(
-                                                        Icons.delete,
-                                                        color:
-                                                            Colors.red,
+                                                      IconButton(
+                                                        icon: Icon(
+                                                          Icons.delete,
+                                                          color: Colors.red,
+                                                        ),
+                                                        iconSize: 30,
+                                                        onPressed: () async {
+                                                          bool confirm = await showDialog(
+                                                            context: context,
+                                                            builder: (context) => AlertDialog(
+                                                              title: Text('Confirmação de Exclusão'),
+                                                              content: Text('Você tem certeza que deseja excluir esta vaga?'),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () => Navigator.pop(context, false),
+                                                                  child: Text('Cancelar'),
+                                                                ),
+                                                                TextButton(
+                                                                  onPressed: () => Navigator.pop(context, true),
+                                                                  child: Text('Excluir'),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          );
+                                                          if (confirm) {
+                                                            _deleteVaga(doc.id);
+                                                          }
+                                                        },
                                                       ),
                                                     ],
                                                   ),
